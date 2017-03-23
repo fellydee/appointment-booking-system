@@ -26,4 +26,21 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function getRememberTokenName()
+    {
+        return null;
+    }
+
+    /**
+    * Overrides the method to ignore the remember token.
+    */
+    public function setAttribute($key, $value)
+    {
+        $isRememberTokenAttribute = $key == $this->getRememberTokenName();
+        if (!$isRememberTokenAttribute)
+        {
+            parent::setAttribute($key, $value);
+        }
+    }
 }
