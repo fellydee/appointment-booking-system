@@ -7,9 +7,11 @@
     
     <title>{{ config('app.name') }}</title>
     
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    @yield('content')
+    <div class="container">
+        @yield('content')
+    </div>
 </body>
 </html>
