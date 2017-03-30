@@ -19,7 +19,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'first_name' => $faker->firstNameMale,
         'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
-        'phone' => $faker->cellNumber,
+        'phone' => $faker->phoneNumber,
         'address' => $faker->streetAddress,
         'city'=> $faker->city,
         'state' => $faker->state,
