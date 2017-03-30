@@ -76,14 +76,14 @@
                     <div class="form-group">
                         <label for="password-confirm" class="col-md-4 control-label">Password</label>
                         <div class="col-md-6">
-                            <input type="password" class="form-control" name="password" required>
+                            <input type="password" class="form-control" name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
                         <div class="col-md-6">
-                            <input type="password" class="form-control" name="password_confirmation" required>
+                            <input type="password" class="form-control" name="password_confirmation" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}">
                         </div>
                     </div>
 
@@ -92,6 +92,8 @@
                             <button type="submit" class="btn btn-primary">Register</button>
                         </div>
                     </div>
+
+                    <p>Password must be at least 8 characters long, contain at least one upper and lower case letter and at least one digit</p>
                 </form>
             </div>
         </div>

@@ -56,7 +56,7 @@ class RegisterController extends Controller
             'city' => 'required',
             'state' => 'required',
             'post_code' => 'required',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|confirmed|regex:/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/',
         ]);
     }
 
