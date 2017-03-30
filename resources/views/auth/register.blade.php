@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <label for="name" class="col-md-4 control-label">Last Name</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="last_name" required autofocus>
+                            <input type="text" class="form-control" name="last_name" required>
                         </div>
                     </div>
 
@@ -33,28 +33,28 @@
                     <div class="form-group">
                         <label for="name" class="col-md-4 control-label">Phone</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="phone" required autofocus>
+                            <input type="text" class="form-control" name="phone" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="name" class="col-md-4 control-label">Address</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="address" required autofocus>
+                            <input type="text" class="form-control" name="address" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="name" class="col-md-4 control-label">City</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="city" required autofocus>
+                            <input type="text" class="form-control" name="city" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="name" class="col-md-4 control-label">State</label>
                         <div class="col-md-6">
-                            <select  class="form-control" name="state" required autofocus>
+                            <select  class="form-control" name="state" required>
                                 <option disabled selected value>Select a State</option>
                                 <option value="VIC">Victoria</option>
                                 <option value="NSW">New South Wales</option>
@@ -69,7 +69,7 @@
                     <div class="form-group">
                         <label for="name" class="col-md-4 control-label">Postal Code</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="post_code" required autofocus>
+                            <input type="text" class="form-control" name="post_code" required pattern="\d{4}">
                         </div>
                     </div>
 
