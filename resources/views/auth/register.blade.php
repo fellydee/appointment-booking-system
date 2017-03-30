@@ -10,9 +10,16 @@
                     {{ csrf_field() }}
 
                     <div class="form-group">
-                        <label for="name" class="col-md-4 control-label">Name</label>
+                        <label for="name" class="col-md-4 control-label">First Name</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="name" required autofocus>
+                            <input type="text" class="form-control" name="first_name" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-md-4 control-label">Last Name</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="last_name" required autofocus>
                         </div>
                     </div>
 
@@ -24,7 +31,42 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password" class="col-md-4 control-label">Password</label>
+                        <label for="name" class="col-md-4 control-label">Phone</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="phone" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-md-4 control-label">Address</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="address" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-md-4 control-label">City</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="city" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-md-4 control-label">State</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="state" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name" class="col-md-4 control-label">Postal Code</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="post_code" required autofocus>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password-confirm" class="col-md-4 control-label">Password</label>
                         <div class="col-md-6">
                             <input type="password" class="form-control" name="password" required>
                         </div>
