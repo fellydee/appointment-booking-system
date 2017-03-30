@@ -20,7 +20,7 @@ class RegisterTest extends DuskTestCase
             ->type('phone','0411122200')
             ->type('address','124 La Trobe St')
             ->type('city','Melbourne')
-            ->type('state','VIC')
+            ->select('state','VIC')
             ->type('post_code','3000')
             ->type('password', 'password')
             ->type('password_confirmation', 'password')

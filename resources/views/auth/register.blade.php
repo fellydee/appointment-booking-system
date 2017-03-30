@@ -54,7 +54,15 @@
                     <div class="form-group">
                         <label for="name" class="col-md-4 control-label">State</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="state" required autofocus>
+                            <select  class="form-control" name="state" required autofocus>
+                                <option disabled selected value>Select a State</option>
+                                <option value="VIC">Victoria</option>
+                                <option value="NSW">New South Wales</option>
+                                <option value="QLD">Queensland</option>
+                                <option value="TAS">Tasmania</option>
+                                <option value="WA">Western Australia</option>
+                                <option value="SA">South Australia</option>
+                            </select>
                         </div>
                     </div>
 
