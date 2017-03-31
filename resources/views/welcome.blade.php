@@ -16,13 +16,6 @@
 
 <style>
 
-body {
-    background-image: url("http://senamalancha.com/(S(nlannpjrpoo3ajpflx5hfb2t))/logindata/bg-8.jpg");
-    background-size: cover;
-    background-color: rgba(0,0,0,.45);
-    background-blend-mode: multiply;
-}
-
 #title {
     margin: auto;
     text-align: center;
