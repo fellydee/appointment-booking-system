@@ -2,6 +2,7 @@
 
 namespace Tests\Browser;
 
+use App\User;
 use Tests\DuskTestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -12,7 +13,7 @@ class LoginTest extends DuskTestCase
 
     public function test_user_successful_login()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
 
         $this->browse(function ($browser) use ($user) {
             $browser->visit('/login')

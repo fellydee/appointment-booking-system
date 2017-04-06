@@ -17,6 +17,7 @@
 
 </head>
 <body>
+    @include('layout.nav')
     <div class="container">
         @yield('content')
     </div>

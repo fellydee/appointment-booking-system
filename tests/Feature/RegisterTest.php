@@ -13,11 +13,6 @@ class RegisterTest extends TestCase
 
     use DatabaseTransactions;
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function test_register_page_status_OK()
     {
         $response = $this->get('/register');
@@ -34,4 +29,21 @@ class RegisterTest extends TestCase
 
         $response->assertStatus(302);
     }
+
+//    public function test_password_length_less_than_six_fails()
+//    {
+//        $user = factory(User::class)->make([
+//            'password' => bcrypt('four')
+//        ]);
+//
+//        $response = $this->call('POST', '/register', [
+//            'name' => $user->name,
+//            'email' => $user->email,
+//            'password' => $user->password,
+//            'password_confirmation' => $user->password,
+//            'role' => 1
+//        ]);
+//
+//        $response->assertRedirect('/register');
+//    }
 }

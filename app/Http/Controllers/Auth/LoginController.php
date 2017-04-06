@@ -45,7 +45,7 @@ class LoginController extends Controller
     {
         if ($user->isBusinessOwner())
         {
-            return redirect()->intended('admin');
+            return redirect()->intended('/admin');
         }
         return redirect()->intended('/home');
     }
