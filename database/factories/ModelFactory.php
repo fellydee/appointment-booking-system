@@ -19,5 +19,32 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
+        'role' => 0
+    ];
+});
+
+$factory->define(App\Employee::class, function (Faker\Generator $faker) {
+    return [
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'email' => $faker->unique()->safeEmail,
+        'phone' => $faker->phoneNumber,
+        'address' => $faker->address
+    ];
+});
+
+$factory->define(App\Timeslot::class, function (Faker\Generator $faker) {
+    return [
+        'date' => \Carbon\Carbon::now(),
+        'week_id' => 1,
+        'start_time' => '09:00',
+        'end_time' => '17:00'
+    ];
+});
+
+$factory->define(App\Week::class, function (Faker\Generator $faker) {
+    return [
+        'start_date' => \Carbon\Carbon::now()->startOfWeek(),
+        'employee_id' => 1
     ];
 });

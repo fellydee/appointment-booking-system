@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role'
     ];
 
     /**
@@ -26,6 +26,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function isBusinessOwner()
+    {
+        return $this->role == 0;
+    }
+
+
+
+
 
     public function getRememberTokenName()
     {

@@ -8,10 +8,20 @@
     <title>{{ config('app.name') }}</title>
     
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!}
+    </script>
+
 </head>
 <body>
     <div class="container">
         @yield('content')
     </div>
+
+    <script src="{{ mix('js/app.js') }}"></script>
+
 </body>
 </html>
