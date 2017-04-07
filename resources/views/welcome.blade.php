@@ -8,9 +8,7 @@
 </div>
 
 <div class="button">
-
     <a id = "Login" href="{{ url('/login') }}"><button class= "btn btn-primary">Login</button></a>
-
     <a id = "Register" href="{{ url('/register') }}"><button class= "btn btn-primary">Register</button></a>
 </div>
 

@@ -15,6 +15,8 @@
                         </ul>
                     </div>
                 @endif
+                 <a id = "Back" href="{{ URL::previous() }}"><button class= "btn btn-primary">Back</button></a>
+
                 <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
 
