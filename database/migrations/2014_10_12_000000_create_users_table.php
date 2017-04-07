@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('state');
             $table->string('post_code');
             $table->string('password');
-            $table->integer('role');
+            $table->integer('role')->default(1);
             $table->timestamps();
         });
     }

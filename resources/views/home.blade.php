@@ -9,7 +9,7 @@
                 <a href="{{ url('/logout') }}" class="pull-right">Logout</a>
             </div>
             <div class="panel-body">
-                {{ Auth::user()->name }}
+                {{ Auth::user()->first_name }}
             </div>
         </div>
     </div>
