@@ -6,6 +6,17 @@
         <div class="panel panel-default">
             <div class="panel-heading">Login</div>
             <div class="panel-body">
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                 <a id = "Back" href="{{ URL::previous() }}"><button class= "btn btn-primary">Back</button></a>
+
                 <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
 
@@ -35,4 +46,14 @@
         </div>
     </div>
 </div>
+
+<style>
+
+body {
+    background-image: url("http://senamalancha.com/(S(nlannpjrpoo3ajpflx5hfb2t))/logindata/bg-8.jpg");
+    background-size: cover;
+    background-color: rgba(0,0,0,.45);
+    background-blend-mode: multiply;
+}
+</style>
 @stop
