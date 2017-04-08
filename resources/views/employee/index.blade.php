@@ -3,6 +3,12 @@
 @section('content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                  Employee List
+                    <a href="{{ url('/admin') }}" class="pull-right">Back</a>
+                </div>
+            </div>
             @foreach($employees as $employee)
                 <div class="panel panel-default">
                     <div class="panel-heading">
