@@ -22,6 +22,7 @@ To run the application use ```php artisan serve``` and visit ```localhost:8000``
 
 ### Run tests
 To run feature tests use ```phpunit```
+
 To run browser tests use ```php artisan dusk```
 
 
