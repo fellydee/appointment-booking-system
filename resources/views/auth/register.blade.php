@@ -4,7 +4,10 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
-            <div class="panel-heading">Register</div>
+            <div class="panel-heading">
+                Register
+                <a href="{{ url('/') }}" class="pull-right">Back</a>
+            </div>
             <div class="panel-body">
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
@@ -15,7 +18,6 @@
                         </ul>
                     </div>
                 @endif
-                 <a id = "Back" href="{{ URL::previous() }}"><button class= "btn btn-primary">Back</button></a>
 
                 <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
