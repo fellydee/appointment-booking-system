@@ -1,13 +1,33 @@
-## Appointment Booking System
-
 [![Build Status](https://travis-ci.org/rmit-s3542623-aiden-garipoli/appointment-booking-system.svg?branch=master)](https://travis-ci.org/rmit-s3542623-aiden-garipoli/appointment-booking-system)
+# Appointment Booking System
 
-# Documentation
+## Intro
 
 We are using Laravel (PHP Framework). The framework comes with built in middleware for common user authentication functionality which we will be utilising with out own controllers and views. 
 
-Aiden Garipoli - s3542623
+## Installing
+### Requirements
 
-Tyler Watkins - s3542686
++ [PHP 7.1.1](http://php.net/downloads.php)
++ [Composer](https://getcomposer.org/)
++ [MySQL](https://www.mysql.com/)
 
-Daniel Milner - s3542977
+Use ```composer install``` to install dependencies
+
+To run the application use ```php artisan serve``` and visit ```localhost:8000``` in your browser
+
+## Testing
+### Requirements
++ [phpunit](https://phpunit.de/)
+
+### Run tests
+To run feature tests use ```phpunit```
+To run browser tests use ```php artisan dusk```
+
+
+## Contributors
+Name | Student ID 
+--- | --- 
+Aiden Garipoli | s3542623
+Tyler Watkins | s3542686
+Daniel Milner | s3542977
