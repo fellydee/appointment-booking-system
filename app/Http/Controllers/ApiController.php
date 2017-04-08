@@ -17,7 +17,12 @@ class ApiController extends Controller
     public function myBookings()
     {
         $user = Auth::user();
-        $bookings = Booking::where('user_id',Auth::id())->get();
-        return $bookings;
+        if($user->role == 0) {
+            $bookings = Booking::where('business_id', $user->business_id)->get();
+            return $bookings;
+        }else{
+            $bookings = Booking::where('user_id',Auth::id())->get();
+            return $bookings;
+        }
     }
 }

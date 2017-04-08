@@ -27,9 +27,8 @@
 
         $('#calendar').fullCalendar({
             defaultView:'listYear',
-            height: 400,
+            height: 300,
             events: 'api/myBookings'
-            // put your options and callbacks here
         })
 
     });
