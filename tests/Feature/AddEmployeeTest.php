@@ -26,7 +26,7 @@ class AddEmployeeTest extends TestCase
         $user = factory(User::class)->create(['role' => 0]);
 
         $respone = $this->actingAs($user)
-            ->get('/employee/create');
+            ->get('/employees/create');
 
         $respone->assertStatus(200);
     }
@@ -36,7 +36,7 @@ class AddEmployeeTest extends TestCase
         $user = factory(User::class)->create(['role' => 0]);
 
         $response = $this->actingAs($user)
-            ->get('/employee');
+            ->get('/employees');
 
         $response->assertStatus(200);
     }
@@ -46,7 +46,7 @@ class AddEmployeeTest extends TestCase
         $user = factory(User::class)->create(['role' => 1]);
 
         $response = $this->actingAs($user)
-            ->get('/employee/create');
+            ->get('/employees/create');
 
         $response->assertStatus(302);
     }
@@ -56,7 +56,7 @@ class AddEmployeeTest extends TestCase
         $user = factory(User::class)->create(['role' => 1]);
 
         $response = $this->actingAs($user)
-            ->get('/employee');
+            ->get('/employees');
 
         $response->assertStatus(302);
     }
@@ -67,7 +67,7 @@ class AddEmployeeTest extends TestCase
         $user = factory(User::class)->create(['role' => 0]);
 
         $response = $this->actingAs($user)
-            ->get('/employee');
+            ->get('/employees');
 
         $response->assertSee(Employee::first()->first_name);
     }
@@ -92,7 +92,7 @@ class AddEmployeeTest extends TestCase
         $user = factory(User::class)->create(['role' => 0]);
 
         $this->actingAs($user)
-            ->post('/employee', [
+            ->post('/employees', [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
                 'email' => 'johnny@gmail.com',
@@ -110,7 +110,7 @@ class AddEmployeeTest extends TestCase
         $user = factory(User::class)->create(['role' => 0]);
 
         $this->actingAs($user)
-            ->post('/employee', [
+            ->post('/employees', [
                 'first_name' => 'John',
                 'last_name' => 'Doe',
                 'email' => 'johnny@gmail.com',
@@ -125,16 +125,15 @@ class AddEmployeeTest extends TestCase
 
     public function test_employee_add_passes_phone_length_correct()
     {
-        $user = factory(User::class)->create(['role' => 0]);
+        $user = factory(User::class)->create(['role' => 0, 'business_id' => 1]);
 
         $response = $this->actingAs($user)
-            ->post('/employee', [
+            ->post('/employees', [
                 'first_name' => 'Daniel',
                 'last_name' => 'Stephenson',
                 'email' => 'danny@gmail.com',
-                'phone' => '0406799838',
-                'address' => '123 example st example',
-                'date' => '2017-03-17'
+                'phone' => '1234567890',
+                'address' => '123 example st example'
             ]);
 
         $response->assertStatus(302);
