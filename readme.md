@@ -14,6 +14,10 @@ We are using Laravel (PHP Framework). The framework comes with built in middlewa
 
 Use ```composer install``` to install dependencies
 
+The ```.env``` will need to be configured with your SQL servers details.
+
+To populate the database with tables ```php artisan migrate:refresh``` should be run
+
 To run the application use ```php artisan serve``` and visit ```localhost:8000``` in your browser
 
 ## Testing
