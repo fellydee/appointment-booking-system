@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Business;
+use App\Employee;
+use App\EmployeeService;
 use App\User;
 use App\Booking;
 use App\Http\Controllers\Controller;
@@ -49,6 +51,10 @@ class ApiController extends Controller
 
     public function getBusinesses(){
         return Business::all();
+    }
+
+    public function test(){
+        return Employee::with(['EmployeeService','service'])->get();
     }
 
 }

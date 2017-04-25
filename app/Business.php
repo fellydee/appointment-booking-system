@@ -17,4 +17,8 @@ class Business extends Model
         return $this->hasMany(BusinessHours::class);
     }
 
+    public function service(){
+        return $this->hasMany(Service::class);
+    }
+
 }

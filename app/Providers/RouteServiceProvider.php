@@ -38,6 +38,8 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::get('api/myBookings','App\Http\Controllers\ApiController@myBookings');
         Route::get('api/getBusinessInfo/{id}','App\Http\Controllers\ApiController@getBusinessInfo');
+        Route::get('api/getBusinesses','App\Http\Controllers\ApiController@getBusinesses');
+        Route::get('api/test','App\Http\Controllers\ApiController@test');
         //$this->mapApiRoutes();
         $this->mapWebRoutes();
 

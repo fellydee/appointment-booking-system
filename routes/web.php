@@ -22,3 +22,5 @@ Route::get('logout', function () {
     Auth::logout();
     return redirect('/login');
 });
+
+Route::resource('/booking', 'BookingController');

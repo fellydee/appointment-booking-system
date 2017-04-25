@@ -22,4 +22,9 @@ class Employee extends Model
     {
         return $this->hasOne(Roster::class);
     }
+
+    public function service(){
+        return $this->belongsToMany(Service::class,EmployeeService::class);
+    }
+
 }
