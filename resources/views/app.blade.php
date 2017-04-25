@@ -8,7 +8,7 @@
     <title>{{ config('app.name') }}</title>
     
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-
+    @yield('head')
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),

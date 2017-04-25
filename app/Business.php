@@ -12,4 +12,9 @@ class Business extends Model
     {
         return $this->hasMany(Employee::class);
     }
+
+    public function businessHours(){
+        return $this->hasMany(BusinessHours::class);
+    }
+
 }
