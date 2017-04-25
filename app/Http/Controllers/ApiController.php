@@ -42,7 +42,13 @@ class ApiController extends Controller
     }
 
     public function getBusinessInfo($id){
-        return Business::with('businesshours')->get();
+        return Business::with(['businesshours','service'])
+            ->where('id',$id)->get();
+    }
+
+
+    public function getBusinesses(){
+        return Business::all();
     }
 
 }
