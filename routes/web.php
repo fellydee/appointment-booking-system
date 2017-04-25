@@ -11,6 +11,8 @@ Route::resource('/rosters', 'RosterController', ['only' => [
     'create', 'store', 'update', 'destroy', 'edit',
 ]]);
 
+Route::resource('/hours', 'HoursController', ['only' => ['index', 'store']]);
+
 // temporary
 Route::get('/', function () {
     return view('welcome');
