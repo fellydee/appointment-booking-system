@@ -1,4 +1,5 @@
 <script src="/js/moment.min.js"></script>
+<script src="/js/jquery-3.2.0.min.js"></script>
 <div class="panel panel-default">
     <div class="panel-heading">
         Roster
@@ -12,11 +13,11 @@
             <form class="form-horizontal" role="form" method="POST" action="{{ url('/rosters') }}">
                 {{ csrf_field() }}
 
-                <div class="form-group startFinishSelector" >
+                <div class="form-group startFinishSelector">
                     <label for="monday_start" class="col-md-2 control-label">Monday</label>
                     <div class="col-md-5">
                         <select name="monday_start" class="form-control startSelector">
-                            <option value="null">Not Working</option>
+                            <option value="notworking">Not Working</option>
                         </select>
                     </div>
                     <div class="col-md-5">
@@ -27,10 +28,10 @@
                 </div>
 
                 <div class="form-group startFinishSelector">
-                    <label for="monday_start" class="col-md-2 control-label">Tuesday</label>
+                    <label for="tuesday_start" class="col-md-2 control-label">Tuesday</label>
                     <div class="col-md-5">
                         <select name="tuesday_start" class="form-control startSelector">
-                            <option value="null">Not Working</option>
+                            <option value="notworking">Not Working</option>
                         </select>
                     </div>
                     <div class="col-md-5">
@@ -41,10 +42,10 @@
                 </div>
 
                 <div class="form-group startFinishSelector">
-                    <label for="monday_start" class="col-md-2 control-label">Wednesday</label>
+                    <label for="wednesday_start" class="col-md-2 control-label">Wednesday</label>
                     <div class="col-md-5">
                         <select name="wednesday_start" class="form-control startSelector">
-                            <option value="null">Not Working</option>
+                            <option value="notworking">Not Working</option>
                         </select>
                     </div>
                     <div class="col-md-5">
@@ -55,10 +56,10 @@
                 </div>
 
                 <div class="form-group startFinishSelector">
-                    <label for="monday_start" class="col-md-2 control-label">Thursday</label>
+                    <label for="thursday_start" class="col-md-2 control-label">Thursday</label>
                     <div class="col-md-5">
                         <select name="thursday_start" class="form-control startSelector">
-                            <option value="null">Not Working</option>
+                            <option value="notworking">Not Working</option>
                         </select>
                     </div>
                     <div class="col-md-5">
@@ -69,10 +70,10 @@
                 </div>
 
                 <div class="form-group startFinishSelector">
-                    <label for="monday_start" class="col-md-2 control-label">Friday</label>
+                    <label for="friday_start" class="col-md-2 control-label">Friday</label>
                     <div class="col-md-5">
-                        <select name="friday_start" class="form-control startSelector" >
-                            <option value="null">Not Working</option>
+                        <select name="friday_start" class="form-control startSelector">
+                            <option value="notworking">Not Working</option>
                         </select>
                     </div>
                     <div class="col-md-5">
@@ -83,10 +84,10 @@
                 </div>
 
                 <div class="form-group startFinishSelector">
-                    <label for="monday_start" class="col-md-2 control-label">Saturday</label>
+                    <label for="saturday_start" class="col-md-2 control-label">Saturday</label>
                     <div class="col-md-5">
                         <select name="saturday_start" class="form-control startSelector">
-                            <option value="null">Not Working</option>
+                            <option value="notworking">Not Working</option>
                         </select>
                     </div>
                     <div class="col-md-5">
@@ -97,10 +98,10 @@
                 </div>
 
                 <div class="form-group startFinishSelector">
-                    <label for="monday_start" class="col-md-2 control-label">Sunday</label>
+                    <label for="sunday_start" class="col-md-2 control-label">Sunday</label>
                     <div class="col-md-5">
                         <select name="sunday_start" class="form-control startSelector">
-                            <option value="null">Not Working</option>
+                            <option value="notworking">Not Working</option>
                         </select>
                     </div>
                     <div class="col-md-5">
@@ -126,13 +127,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($employee->roster->timeslots as $timeslot)
-                            <tr>
-                                <td>{{ $timeslot->day }}</td>
-                                <td>{{ $timeslot->start_time }}</td>
-                                <td>{{ $timeslot->end_time }}</td>
-                            </tr>
-                        @endforeach
+                    @foreach($employee->roster->timeslots as $timeslot)
+                        <tr>
+                            <td>{{ $timeslot->day }}</td>
+                            <td>{{ $timeslot->start_time }}</td>
+                            <td>{{ $timeslot->end_time }}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
         </div>
@@ -143,16 +144,43 @@
 
     // Get a list of times spaced 30 mins apart
     var time = moment("2017-01-01 00:00:00");
-    var times = [];
+    var timeList = [];
     for (var i = 0; i < 48; i++) {
-        times.push(time.format("LT"))
-
-        for (var k = 0; k < startCombos.length; k++) {
-            addOption(startCombos[k], times[i])
-        }
-
+        timeList.push(time.format("LT"))
         time.add(30, 'm');
     }
+
+    $.ajax({
+        url: "/api/getBusinessInfo/{{$employee->business_id}}",
+        dataType: 'json'
+    }).done(function (data) {
+        var hours = data[0].businesshours;
+        for (var i = 0; i < hours.length; i++) {
+            var businessDay = hours[i];
+            businessDay.open_time = moment(businessDay.open_time, 'H:m:s').format('LT');
+            businessDay.close_time = moment(businessDay.close_time, 'H:m:s').format('LT');
+            // console.log(businessDay)
+            // add timeList from this point
+            var index_start = timeList.indexOf(businessDay.open_time);
+            var index_stop = timeList.indexOf(businessDay.close_time);
+            startCombos[i].dataset.startIndex = index_start;
+            startCombos[i].dataset.stopIndex = index_stop;
+            for(var k = index_start; k < index_stop; k++){
+                addOption(startCombos[i],timeList[k])
+            }
+        }
+
+        startCombos.forEach(function(combo){
+            if(combo.options.length == 1){
+                combo.options[0].text = "Closed"
+                combo.options[0].value = "closed"
+                combo.disabled = true;
+            }
+
+
+        })
+
+    });
 
     // Add the event listeners
     for (var i = 0; i < startCombos.length; i++) {
@@ -164,16 +192,15 @@
                 finishCombo.disabled = true;
                 return;
             }
-            var selected = e.target.selectedIndex;
-            for (var i = selected; i < times.length; i++) {
-                addOption(finishCombo, times[i])
+            var selected = parseInt(e.target.dataset.startIndex) + e.target.selectedIndex
+            console.log(selected)
+            console.log(e.target.selectedIndex)
+            for (var i = selected; i < e.target.dataset.stopIndex; i++) {
+                addOption(finishCombo, timeList[i])
             }
             finishCombo.disabled = false;
         })
     }
-
-
-
 
     function addOption(combo, value) {
         var option = document.createElement("option");
@@ -181,4 +208,6 @@
         option.value = value;
         combo.add(option)
     }
+
+
 </script>
