@@ -9,87 +9,84 @@
                 <a href="{{ url('/') }}" class="pull-right">Back</a>
             </div>
             <div class="panel-body">
-                @if (count($errors) > 0)
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
                 <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
 
-                    <div class="form-group">
-                        <label for="name" class="col-md-4 control-label">First Name</label>
+                    <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+                        <label for="first_name" class="col-md-4 control-label">First Name</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="first_name" required autofocus>
+                            <input type="text" class="form-control"
+                                   name="first_name" value="{{ old('first_name') }}" required autofocus>
+                            @if ($errors->has('first_name'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="name" class="col-md-4 control-label">Last Name</label>
+                    <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                        <label for="last_name" class="col-md-4 control-label">Last Name</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="last_name" required>
+                            <input type="text" class="form-control"
+                                   name="last_name" value="{{ old('last_name') }}" required>
+                            @if ($errors->has('last_name'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('last_name') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                         <label for="email" class="col-md-4 control-label">E-Mail Address</label>
                         <div class="col-md-6">
-                            <input type="email" class="form-control" name="email" required>
+                            <input type="email" class="form-control"
+                                   name="email" value="{{ old('email') }}" required>
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="name" class="col-md-4 control-label">Phone</label>
+                    <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                        <label for="phone" class="col-md-4 control-label">Phone</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="phone" required>
+                            <input type="text" class="form-control"
+                                   name="phone" value="{{ old('phone') }}" required>
+                            @if ($errors->has('phone'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="name" class="col-md-4 control-label">Address</label>
+                    <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
+                        <label for="address" class="col-md-4 control-label">Address</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="address" required>
+                            <input type="text" class="form-control"
+                                   name="address" value="{{ old('address') }}" required>
+                            @if ($errors->has('address'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('address') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="name" class="col-md-4 control-label">City</label>
+                    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                        <label for="password" class="col-md-4 control-label">Password</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" name="city" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="name" class="col-md-4 control-label">State</label>
-                        <div class="col-md-6">
-                            <select  class="form-control" name="state" required>
-                                <option disabled selected value>Select a State</option>
-                                <option value="VIC">Victoria</option>
-                                <option value="NSW">New South Wales</option>
-                                <option value="QLD">Queensland</option>
-                                <option value="TAS">Tasmania</option>
-                                <option value="WA">Western Australia</option>
-                                <option value="SA">South Australia</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="name" class="col-md-4 control-label">Postal Code</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="post_code" required pattern="\d{4}">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password-confirm" class="col-md-4 control-label">Password</label>
-                        <div class="col-md-6">
-                            <input type="password" class="form-control" name="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}">
+                            <input type="password" class="form-control"
+                                   name="password" required>
+                            @if ($errors->has('password'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
 
