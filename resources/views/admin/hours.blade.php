@@ -164,7 +164,7 @@
 
                     // Select hours if they are already present;
                     $.ajax({
-                        url: "api/getBusinessInfo/{{$user->business_id}}",
+                        url: "/api/getBusinessInfo/{{$user->business_id}}",
                         dataType:'json'
                     }).done(function(data) {
                         var hours = data[0].businesshours;

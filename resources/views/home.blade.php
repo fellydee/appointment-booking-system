@@ -1,10 +1,13 @@
 @extends('app')
 
-@section('content')
+@section('head')
     <link rel='stylesheet' href='/css/fullcalendar.min.css' />
     <script src='/js/jquery-3.2.0.min.js'></script>
     <script src='/js//moment.min.js'></script>
     <script src='/js//fullcalendar.min.js'></script>
+@stop
+
+@section('content')
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default">
