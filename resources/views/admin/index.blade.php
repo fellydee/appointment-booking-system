@@ -27,6 +27,9 @@
                     <a href="{{ url('/hours') }}" >Business Hours</a>
                 </div>
                 <div class="panel-body">
+                    <a href="{{ url('/services') }}" >Business Services</a>
+                </div>
+                <div class="panel-body">
                     <h3>Upcoming bookings</h3>
                     <div id="calendar"></div>
                 </div>

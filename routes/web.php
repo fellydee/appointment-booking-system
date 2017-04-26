@@ -24,3 +24,5 @@ Route::get('logout', function () {
 });
 
 Route::resource('/booking', 'BookingController');
+
+route::resource('/services', 'ServiceController');
