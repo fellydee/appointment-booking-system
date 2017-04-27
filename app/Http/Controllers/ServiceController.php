@@ -29,8 +29,20 @@ class ServiceController extends Controller
         return view('service.create');
     }
 
-    public function store(){
+    public function store(Request $request){
+        $this->validate($request, [
+            'business_id' => 'required|digits',
+            'title' => 'required',
+            'description' => 'required',
+            'duration' => 'required|digits'
+        ]);
 
+        Service::create([
+            'business_id' => $request->user()->business_id,
+            'title' => $request->get('title'),
+            'description' => $request->get('description'),
+            'duration' => $request->get('duration')
+        ]);
     }
 
     public function update(){
@@ -40,12 +52,11 @@ class ServiceController extends Controller
     public function show(){}
 
 
-    public function destroy($id){
-        $service = Service::where('id',$id)->first();
+    public function destroy(Service $service){
         if($service === null){
             session()->flash('error','There was a problem removing the service');
         }else {
-            Service::where('id', $id)->delete();
+            $service->delete();
             session()->flash('status', 'Service Removed');
         }
         return redirect('/services');

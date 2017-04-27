@@ -18,7 +18,7 @@ class CreateServicesTable extends Migration
             $table->integer('business_id');
             $table->string('title');
             $table->string('description');
-            $table->time('length');
+            $table->integer('duration'); // duration in minutes
             $table->timestamps();
         });
     }
