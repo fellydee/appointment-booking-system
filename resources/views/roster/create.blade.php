@@ -164,7 +164,7 @@
             var index_start = timeList.indexOf(businessDay.open_time);
             var index_stop = timeList.indexOf(businessDay.close_time);
             startCombos[i].dataset.startIndex = index_start;
-            startCombos[i].dataset.stopIndex = index_stop;
+            startCombos[i].dataset.stopIndex = index_stop+1;
             for(var k = index_start; k < index_stop; k++){
                 addOption(startCombos[i],timeList[k])
             }

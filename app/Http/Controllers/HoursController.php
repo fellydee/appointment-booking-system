@@ -31,14 +31,12 @@ class HoursController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-
         BusinessHours::where('business_id', $user->business_id)->delete(); // Remove all old hour records
         $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
         for ($i = 0; $i < count($days); $i++) {
             if ($request[$days[$i] . '_start'] != "null") {
                 BusinessHours::create([
-                    'business_id' => $user->business_id,
+                    'business_id' => $request->user()->business_id,
                     'day' => $i,
                     'open_time' => strftime('%T', strtotime($request[$days[$i] . '_start'])),
                     'close_time' => strftime('%T', strtotime($request[$days[$i] . '_end']))
