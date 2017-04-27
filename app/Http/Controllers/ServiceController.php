@@ -21,7 +21,7 @@ class ServiceController extends Controller
 
     public function index()
     {
-        $services = Service::where('business_id',Auth::user()->id)->get();
+        $services = Service::where('business_id',Auth::user()->business_id)->get();
         return view('service.index',compact('services'));
     }
 

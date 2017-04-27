@@ -1,10 +1,6 @@
 @extends('app')
 
 @section('head')
-    <link rel='stylesheet' href='/css/fullcalendar.min.css' />
-    <script src='/js/jquery-3.2.0.min.js'></script>
-    <script src='/js//moment.min.js'></script>
-    <script src='/js//fullcalendar.min.js'></script>
 @stop
 
 @section('content')
@@ -29,26 +25,7 @@
                 <div class="panel-body">
                     <a href="{{ url('/services') }}" >Business Services</a>
                 </div>
-                <div class="panel-body">
-                    <h3>Upcoming bookings</h3>
-                    <div id="calendar"></div>
-                </div>
-
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function() {
-
-            // page is now ready, initialize the calendar...
-
-            $('#calendar').fullCalendar({
-                defaultView:'listYear',
-                height: 300,
-                events: 'api/myBookings'
-                // put your options and callbacks here
-            })
-
-        });
-    </script>
 @stop

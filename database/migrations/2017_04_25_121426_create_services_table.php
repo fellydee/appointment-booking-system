@@ -19,6 +19,7 @@ class CreateServicesTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->integer('duration'); // duration in minutes
+            $table->double('price');
             $table->timestamps();
         });
     }

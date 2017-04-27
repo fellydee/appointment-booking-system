@@ -31,7 +31,29 @@ class HoursController extends Controller
 
     public function store(Request $request)
     {
-        BusinessHours::where('business_id', $user->business_id)->delete(); // Remove all old hour records
+        // Validate request
+        $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
+
+        for ($i = 0; $i < count($days); $i++) {
+            if(isset($request[$days[$i] . '_start'])){
+                $start = $request[$days[$i] . '_start'];
+                if($start == 'null'){
+                    continue;
+                }
+                if(isset($request[$days[$i] . '_end'])){
+                    $end = $request[$days[$i] . '_end'];
+                    // Check that end time is greater than the start time
+                    if(strtotime($end) > strtotime($start)){
+                        continue;
+                    }
+                }
+            }
+            session()->flash('error','An error occurred when processing your request, please try again');
+            return redirect('/hours');
+        }
+
+
+        BusinessHours::where('business_id', $request->user()->business_id)->delete(); // Remove all old hour records
         $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
         for ($i = 0; $i < count($days); $i++) {
             if ($request[$days[$i] . '_start'] != "null") {

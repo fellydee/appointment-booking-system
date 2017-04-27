@@ -8,6 +8,11 @@
 @section('content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            @if(request()->session()->has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ request()->session()->get('error') }}
+                </div>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Open Hours
