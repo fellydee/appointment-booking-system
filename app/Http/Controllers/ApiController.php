@@ -58,7 +58,17 @@ class ApiController extends Controller
 
     public function getEmployeeHours($id)
     {
-        return Timeslot::where('employee_id', $id)->get();
+        $business = Business::where('id', $id)->first();
+
+        $formatted = array();
+        foreach ($business->employees as $employee) {
+            foreach ($employee->timeslots as $timeslot) {
+                array_push($formatted, $timeslot->fullCalendarFormat());
+            }
+        }
+
+
+        return $formatted;
     }
 
     public function getBusinesses()
@@ -68,7 +78,7 @@ class ApiController extends Controller
 
     public function test()
     {
-        return Employee::with(['timeslot', 'service'])->get();
+        return Timeslot::all()[0]->fullCalendarFormat();
     }
 
 
@@ -96,22 +106,22 @@ class ApiController extends Controller
 
         // Remove all slots that cannot support the service length
         $slotsRequired = $service->duration / 30;
-        if($slotsRequired > 1){
+        if ($slotsRequired > 1) {
             foreach ($times as $time) {
                 $valid = true;
                 for ($i = 0; $i < $slotsRequired; $i++) {
                     $current = $current = date("H:i:s", strtotime("+30 minutes", strtotime($time)));
                     $val = array_search($current, $times);
-                    if($val == false){
+                    if ($val == false) {
                         $valid = false;
                     }
 
                 }
-                if($valid == true){
-                    array_push($serviceTimes,$time);
+                if ($valid == true) {
+                    array_push($serviceTimes, $time);
                 }
             }
-        }else{
+        } else {
             $serviceTimes = $times;
         }
 
