@@ -35,8 +35,9 @@ class User extends Authenticatable
         return $this->belongsTo(Business::class);
     }
 
-
-
+    public function bookings(){
+        return $this->hasMany(Booking::class);
+    }
 
 
     public function getRememberTokenName()
