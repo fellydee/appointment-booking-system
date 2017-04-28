@@ -27,4 +27,6 @@ Route::get('/booking', 'BookingController@index');
 Route::get('/booking/service/{id}', 'BookingController@showService');
 Route::get('/booking/service/{service_id}/employee/{employee_id}', 'BookingController@showEmployee');
 Route::post('/booking', 'BookingController@processBooking');
+Route::get('/viewBooking/{id}','\App\Http\Controllers\BookingController@viewBooking');
+
 route::resource('/services', 'ServiceController');

@@ -30,7 +30,7 @@ class BookingController extends Controller
             'date' => strftime('%F', strtotime($request['date'])),
             'time' => strftime('%T', strtotime($request['time']))
         ]);
-        return view('booking.complete',compact('booking'));
+        return view('booking.complete', compact('booking'));
     }
 
 
@@ -53,5 +53,11 @@ class BookingController extends Controller
         $service = Service::where('id', $service_id)->first();
         $employee = Employee::where('id', $employee_id)->first();
         return view('booking.book', compact(['service', 'employee']));
+    }
+
+    public function viewBooking($id)
+    {
+        $booking = Booking::where('id', $id)->first();
+        return view('booking.view', compact('booking'));
     }
 }
