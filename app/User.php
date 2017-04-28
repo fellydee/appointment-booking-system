@@ -30,6 +30,11 @@ class User extends Authenticatable
         return $this->role == 0;
     }
 
+    public function business()
+    {
+        return $this->belongsTo(Business::class);
+    }
+
 
 
 

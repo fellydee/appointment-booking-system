@@ -9,7 +9,6 @@ class RosterController extends Controller
 {
     public function store(Request $request)
     {
-
         $user = Auth::user();
 
         Roster::where('business_id', $user->business_id)->delete(); // Remove all old hour records

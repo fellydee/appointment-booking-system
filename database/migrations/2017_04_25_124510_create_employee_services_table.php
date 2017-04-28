@@ -14,7 +14,8 @@ class CreateEmployeeServicesTable extends Migration
     public function up()
     {
         Schema::create('employee_services', function (Blueprint $table) {
-            $table->increments('id');
+//            $table->increments('id');
+            $table->primary(['employee_id', 'service_id']);
             $table->integer('employee_id');
             $table->integer('service_id');
             $table->timestamps();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Employee;
+use App\Service;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -20,7 +21,11 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        return view('employee.show', compact('employee'));
+//        this may not - if a service is booked with one employee,
+//        if might not be able to be booked with any other employees
+//        If so ill fix it
+        $services = Service::doesntHave('employees')->get();
+        return view('employee.show', compact('employee', 'services'));
     }
 
     public function create()

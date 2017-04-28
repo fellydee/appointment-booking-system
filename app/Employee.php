@@ -23,7 +23,8 @@ class Employee extends Model
         return $this->hasMany(Timeslot::class);
     }
 
-    public function service(){
+    public function services()
+    {
         return $this->belongsToMany(Service::class,'employee_services');
     }
 

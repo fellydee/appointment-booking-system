@@ -25,4 +25,5 @@ Route::get('logout', function () {
 
 Route::resource('/booking', 'BookingController');
 
-route::resource('/services', 'ServiceController');
+Route::resource('/services', 'ServiceController');
+Route::post('/services/assign', 'ServiceController@assign');

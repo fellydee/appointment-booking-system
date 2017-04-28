@@ -24,10 +24,21 @@
                         Services Provided
                     </div>
                     <ul>
-                        @foreach($employee->service as $service)
-                            <li>{{$service->title}}</li>
+                        @foreach($employee->services as $service)
+                            <li>{{ $service->title }}</li>
                         @endforeach
                     </ul>
+                    <form action="{{ url('/services/assign') }}" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="employee" value="{{ $employee->id }}">
+
+                        <select name="service">
+                            @foreach($services as $service)
+                                <option value="{{ $service->id }}">{{ $service->title }}</option>
+                            @endforeach
+                        </select>
+                        <button class="btn btn-primary" type="submit">Assign Service</button>
+                    </form>
                 </div>
 
             @include('roster.create')
