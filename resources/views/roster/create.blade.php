@@ -1,18 +1,18 @@
 <script src="/js/moment.min.js"></script>
 <script src="/js/jquery-3.2.0.min.js"></script>
+@if(request()->session()->has('error'))
+    <div class="alert alert-danger" role="alert">
+        {{ request()->session()->get('error') }}
+    </div>
+@endif
 <div class="panel panel-default">
     <div class="panel-heading">
         Roster
-        @if($employee->roster_id)
-            <a href="/rosters/{{ $employee->roster_id }}/edit" class="pull-right">Edit</a>
-        @endif
     </div>
-    @if(! $employee->roster_id)
         <div class="panel-body">
-            <p>This employee does not currently have an active roster</p>
             <form class="form-horizontal" role="form" method="POST" action="{{ url('/rosters') }}">
                 {{ csrf_field() }}
-
+                <input type="hidden" name="employeeid" value="{{$employee->id}}">
                 <div class="form-group startFinishSelector">
                     <label for="monday_start" class="col-md-2 control-label">Monday</label>
                     <div class="col-md-5">
@@ -113,35 +113,15 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary pull-right">Create Roster</button>
+                        <button type="submit" class="btn btn-primary pull-right">Save</button>
                     </div>
                 </div>
             </form>
-            @else
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Day</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($employee->timeslots as $timeslot)
-                        <tr>
-                            <td>{{ $timeslot->day }}</td>
-                            <td>{{ $timeslot->start_time }}</td>
-                            <td>{{ $timeslot->end_time }}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
         </div>
-    @endif
 </div>
 <script>
     var startCombos = document.querySelectorAll('.startFinishSelector .startSelector');
-
+    var finishCombos = document.querySelectorAll('.startFinishSelector .finishSelector');
     // Get a list of times spaced 30 mins apart
     var time = moment("2017-01-01 00:00:00");
     var timeList = [];
@@ -174,7 +154,7 @@
             if(combo.options.length == 1){
                 combo.options[0].text = "Closed"
                 combo.options[0].value = "closed"
-                combo.disabled = true;
+                combo.disabled= true;
             }
 
 
@@ -185,9 +165,26 @@
             dataType: 'json'
         }).done(function (data) {
             data.forEach(function(item,index){
-                var sel = parseInt(startCombos[item.day].dataset.startIndex) - timeList.indexOf(moment(item.start_time).format('LT'));
-                console.log(sel)
-                startCombos[item.day].selectedIndex = sel;
+                var startTime = moment(item.start_time,'H:m:s').format('LT');
+                var endTime = moment(item.end_time,'H:m:s').format('LT');
+                var startSel = startCombos[item.day]
+                for(var i=0;i<startSel.options.length;i++){
+                    if(startSel.options[i].value == startTime){
+                        startSel.selectedIndex=i;
+                    }
+                }
+                finishCombos[item.day].options.length = 0;
+                var selected = parseInt(startCombos[item.day].dataset.startIndex) + startCombos[item.day].selectedIndex;
+                for (var i = selected; i < startCombos[item.day].dataset.stopIndex; i++) {
+                    addOption(finishCombos[item.day], timeList[i])
+                }
+                var endSel = finishCombos[item.day]
+                for(var i=0;i<endSel.options.length;i++){
+                    if(endSel.options[i].value == endTime){
+                        endSel.selectedIndex=i;
+                    }
+                }
+                endSel.disabled = false;
             })
         })
 
@@ -204,8 +201,6 @@
                 return;
             }
             var selected = parseInt(e.target.dataset.startIndex) + e.target.selectedIndex
-            console.log(selected)
-            console.log(e.target.selectedIndex)
             for (var i = selected; i < e.target.dataset.stopIndex; i++) {
                 addOption(finishCombo, timeList[i])
             }
