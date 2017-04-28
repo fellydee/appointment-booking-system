@@ -11,4 +11,12 @@ class Service extends Model
     public function employee(){
         return $this->belongsToMany(Employee::class, 'employee_services');
     }
+
+    public function business(){
+        return $this->hasOne(Business::class,'id','business_id');
+    }
+
+    public function booking(){
+        return $this->hasMany(Booking::class);
+    }
 }

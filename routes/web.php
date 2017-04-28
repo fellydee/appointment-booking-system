@@ -23,6 +23,8 @@ Route::get('logout', function () {
     return redirect('/login');
 });
 
-Route::resource('/booking', 'BookingController');
-
+Route::get('/booking', 'BookingController@index');
+Route::get('/booking/service/{id}', 'BookingController@showService');
+Route::get('/booking/service/{service_id}/employee/{employee_id}', 'BookingController@showEmployee');
+Route::post('/booking', 'BookingController@processBooking');
 route::resource('/services', 'ServiceController');

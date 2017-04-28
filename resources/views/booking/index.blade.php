@@ -25,7 +25,7 @@
                         <li class="list-group-item">
                                 <h5>{{$service->title}}</h5>
                             <p>{{$service->description}}</p>
-                                <a class="btn btn-primary" href="/booking/{{$service->id}}">Book {{$service->title}}</a>
+                                <a class="btn btn-primary" href="/booking/service/{{$service->id}}">Book {{$service->title}}</a>
                         </li>
                     @endforeach
                 </ul>

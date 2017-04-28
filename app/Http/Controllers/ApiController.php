@@ -17,7 +17,7 @@ class ApiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['web','auth']);
+        $this->middleware(['web', 'auth']);
 
     }
 //    public function myBookings()
@@ -39,57 +39,60 @@ class ApiController extends Controller
     }
 
 
-
-    private function processBooking($booking){
+    private function processBooking($booking)
+    {
 
 
     }
 
-    public function getBusinessInfo($id){
-        return Business::with(['businesshours','service'])
-            ->where('id',$id)->get();
+    public function getBusinessInfo($id)
+    {
+        return Business::with(['businesshours', 'service'])
+            ->where('id', $id)->get();
     }
 
 
-    public function getEmployeeHours($id){
-        return Timeslot::where('employee_id',$id)->get();
+    public function getEmployeeHours($id)
+    {
+        return Timeslot::where('employee_id', $id)->get();
     }
 
-    public function getBusinesses(){
+    public function getBusinesses()
+    {
         return Business::all();
     }
 
-    public function test(){
-        return Employee::with(['timeslot','service'])->get();
+    public function test()
+    {
+        return Employee::with(['timeslot', 'service'])->get();
     }
 
 
-    public function getAvailableTimes($id, $date){
-        // Check that the service exists
-        $service = Service::where('id',$id)->first();
-        if($service == null){
-            return "ERROR Service does not exist";
-        }
-        // Check the business exists
-        $business = Business::where('id', $service->business_id)->first();
-        if($business == null) {
-            return "ERROR Business not found";
-        }
-        // TODO Validate the date
-        // Get employees that are working on that day
+    public function getAvailableTimes($id, $date)
+    {
+        $employee = Employee::where('id', $id)->first();
         $dayNum = date('w', strtotime($date)) - 1;
-        if($dayNum < 0 || $dayNum > 6){
+        if ($dayNum < 0 || $dayNum > 6) {
             return "ERROR";
         }
+        if (!$employee->isWorking($date)) {
+            return response()->json([
+                'error' => 'Not working that day'
+            ]);
+        }
+        $times = $employee->timesAvailable($date);
+        if (count($times) == 0) {
+            return response()->json([
+                'error' => 'All booked for that day'
+            ]);
+        }
 
-
-
-        // Get available times for that service on that day
-        // Depends on:
-            // Open hours
-            // Other bookings
-            // Employee aval + able to complete service
-            // Duration fits
+        // Format the times
+        $formattedTimes = array();
+        foreach ($times as $time) {
+            array_push($formattedTimes,date("g:i A", strtotime($time)));
+        }
+        return $formattedTimes;
     }
 
 
