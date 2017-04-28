@@ -77,8 +77,9 @@ class ServiceController extends Controller
         return redirect('/services/' . $service->id);
     }
 
-    public function destroy(Service $service){
-        if($service === null){
+    public function destroy(Service $service)
+    {
+        if($service === null) {
             session()->flash('error','There was a problem removing the service');
         }else {
             $service->delete();
@@ -93,6 +94,16 @@ class ServiceController extends Controller
         $service = Service::find($request->get('service'));
 
         $employee->services()->attach($service);
+
+        return redirect()->back();
+    }
+
+    public function unassign(Request $request)
+    {
+        $employee = Employee::find($request->get('employee'));
+        $service = Service::find($request->get('service'));
+
+        $employee->services()->detach($service);
 
         return redirect()->back();
     }

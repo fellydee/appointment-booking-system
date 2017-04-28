@@ -23,11 +23,22 @@
                     <div class="panel-heading">
                         Services Provided
                     </div>
-                    <ul>
-                        @foreach($employee->services as $service)
-                            <li>{{ $service->title }}</li>
-                        @endforeach
-                    </ul>
+
+                    @foreach($employee->services as $service)
+                        <form method="POST" action="{{ url('/services/unassign') }}">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="employee" value="{{ $employee->id }}">
+                            <input type="hidden" name="service" value="{{ $service->id }}">
+
+                            <ul>
+                                <li>
+                                    {{ $service->title }}
+                                    <button type="submit" class="btn"><span class="glyphicon glyphicon-remove"></span></button>
+                                </li>
+                            </ul>
+                        </form>
+                    @endforeach
+
                     <form action="{{ url('/services/assign') }}" method="POST">
                         {{ csrf_field() }}
                         <input type="hidden" name="employee" value="{{ $employee->id }}">

@@ -21,10 +21,9 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-//        this may not - if a service is booked with one employee,
-//        if might not be able to be booked with any other employees
-//        If so ill fix it
-        $services = Service::doesntHave('employees')->get();
+        $services = Service::whereDoesntHave('employees', function ($query) use ($employee) {
+            $query->where('employee_id', $employee->id);
+        })->get();
         return view('employee.show', compact('employee', 'services'));
     }
 

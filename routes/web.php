@@ -27,3 +27,4 @@ Route::resource('/booking', 'BookingController');
 
 Route::resource('/services', 'ServiceController');
 Route::post('/services/assign', 'ServiceController@assign');
+Route::post('/services/unassign', 'ServiceController@unassign');
