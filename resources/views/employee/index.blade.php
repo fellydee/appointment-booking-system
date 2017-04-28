@@ -17,9 +17,9 @@
                         </a>
                     </div>
                     <div class="panel-body">
-                        <p>{{ $employee->email }}</p>
-                        <p>{{ $employee->phone }}</p>
-                        <p>{{ $employee->address }}</p>
+                        <p>Email:   {{ $employee->email }}</p>
+                        <p>Phone:   {{ $employee->phone }}</p>
+                        <p>Address: {{ $employee->address }}</p>
                     </div>
                 </div>
             @endforeach

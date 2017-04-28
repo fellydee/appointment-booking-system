@@ -14,16 +14,24 @@
             'csrfToken' => csrf_token(),
         ]) !!}
     </script>
-
 </head>
 <body>
     @include('layout.nav')
     <div class="container">
         @yield('content')
     </div>
-
+    
     <script src="{{ mix('js/app.js') }}"></script>
 
 </body>
+<style>
+
+body {
+    background-image: url("http://senamalancha.com/(S(nlannpjrpoo3ajpflx5hfb2t))/logindata/bg-8.jpg");
+    background-size: cover;
+    background-color: rgba(0,0,0,.55);
+    background-blend-mode: multiply;
+}
+</style>
 
 </html>

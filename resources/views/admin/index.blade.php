@@ -13,6 +13,7 @@
             @endif
             <div class="panel panel-default">
                 <div class="panel-heading">
+
                     Admin Dashboard
                     <a href="{{ url('/logout') }}" class="pull-right">Logout</a>
                 </div>

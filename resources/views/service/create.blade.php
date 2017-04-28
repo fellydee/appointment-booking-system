@@ -13,7 +13,6 @@
                     <a href="{{ url('/services') }}" class="pull-right">Back</a>
                 </div>
             </div>
-            asdfasfasf
         </div>
         <div class="col-md-8 col-md-offset-2">
             <a href="/services/create" class="btn btn-primary pull-right">New Service</a>
