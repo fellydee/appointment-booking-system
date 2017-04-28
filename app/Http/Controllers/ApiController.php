@@ -56,9 +56,9 @@ class ApiController extends Controller
     }
 
 
-    public function getEmployeeHours($id)
+    public function getAllEmployeeHours($business_id)
     {
-        $business = Business::where('id', $id)->first();
+        $business = Business::where('id', $business_id)->first();
 
         $formatted = array();
         foreach ($business->employees as $employee) {
@@ -69,6 +69,13 @@ class ApiController extends Controller
 
 
         return $formatted;
+    }
+
+    public function getEmployeeHours($employee_id)
+    {
+        $employee = Employee::where('id', $employee_id)->first();
+
+        return $employee->timeslots;
     }
 
     public function getBusinesses()
