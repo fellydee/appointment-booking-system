@@ -33,7 +33,8 @@ class Employee extends Model
         return $this->hasMany(Booking::class);
     }
 
-    public function isWorking($date){
+    public function isWorking($date)
+    {
         $dayNum = date('w', strtotime($date)) - 1;
         $daytimeslot = $this->timeslots->where('day', $dayNum)->first();
         return $daytimeslot != null;
@@ -59,13 +60,25 @@ class Employee extends Model
         foreach ($bookings as $booking) {
             $slotsToRemove = $booking->service->duration / 30;
             $index = array_search($booking->time, $times);
-            for ($i = 0; $i < $slotsToRemove; $i++){
-                unset($times[$index+$i]);
+            for ($i = 0; $i < $slotsToRemove; $i++) {
+                unset($times[$index + $i]);
             }
         }
         return array_values($times);
 
         // Return array of times
+    }
+
+    public function isBookableAt($date, $time, $length)
+    {
+        if (!$this->isWorking($date)) {
+            return false;
+        }
+        $bookings = $this->bookings->where('date', date("Y-m-d", strtotime($date)));
+        foreach ($bookings as $booking) {
+            if (strtotime($booking->time) != strtotime($time)) {
+            }
+        }
     }
 
 }

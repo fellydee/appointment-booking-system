@@ -35,7 +35,11 @@ class ApiController extends Controller
     public function myBookings()
     {
         $user = Auth::user();
-        $booking = Booking::where('user_id', Auth::id())->get();
+        $bookings = array();
+        foreach ($user->bookings as $booking) {
+            array_push($bookings, $booking->fullCalendarFormat());
+        }
+        return $bookings;
     }
 
 
@@ -68,9 +72,10 @@ class ApiController extends Controller
     }
 
 
-    public function getAvailableTimes($id, $date)
+    public function getAvailableTimes($employee_id, $service_id, $date)
     {
-        $employee = Employee::where('id', $id)->first();
+        $employee = Employee::where('id', $employee_id)->first();
+        $service = Service::where('id', $service_id)->first();
         $dayNum = date('w', strtotime($date)) - 1;
         if ($dayNum < 0 || $dayNum > 6) {
             return "ERROR";
@@ -87,10 +92,33 @@ class ApiController extends Controller
             ]);
         }
 
+        $serviceTimes = array();
+
+        // Remove all slots that cannot support the service length
+        $slotsRequired = $service->duration / 30;
+        if($slotsRequired > 1){
+            foreach ($times as $time) {
+                $valid = true;
+                for ($i = 0; $i < $slotsRequired; $i++) {
+                    $current = $current = date("H:i:s", strtotime("+30 minutes", strtotime($time)));
+                    $val = array_search($current, $times);
+                    if($val == false){
+                        $valid = false;
+                    }
+
+                }
+                if($valid == true){
+                    array_push($serviceTimes,$time);
+                }
+            }
+        }else{
+            $serviceTimes = $times;
+        }
+
         // Format the times
         $formattedTimes = array();
-        foreach ($times as $time) {
-            array_push($formattedTimes,date("g:i A", strtotime($time)));
+        foreach ($serviceTimes as $time) {
+            array_push($formattedTimes, date("g:i A", strtotime($time)));
         }
         return $formattedTimes;
     }

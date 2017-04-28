@@ -30,8 +30,9 @@ class User extends Authenticatable
         return $this->role == 0;
     }
 
-
-
+    public function bookings(){
+        return $this->hasMany(Booking::class);
+    }
 
 
     public function getRememberTokenName()

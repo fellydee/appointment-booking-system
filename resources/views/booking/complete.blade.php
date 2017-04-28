@@ -15,8 +15,8 @@
                     <p>Your booking was made successfully</p>
                     <p>Where: {{$booking->service->business->name}}</p>
                     <p>What: {{$booking->service->title}}</p>
-                    <p>When: {{$booking->getDateTime()}}</p>
-
+                    <p>When: From {{$booking->getStartDateTime()}} To {{$booking->getEndDateTime()}}</p>
+                    <p>Cost: {{$booking->service->priceFormatted()}}</p>
                     <a href="{{url('/home') }}" class="pull-right">Home</a>
                 </div>
             </div>

@@ -19,4 +19,9 @@ class Service extends Model
     public function booking(){
         return $this->hasMany(Booking::class);
     }
+
+    public function priceFormatted(){
+        //money_format does not work on windows and is therefore not used
+        return '$' . number_format($this->price, 2);
+    }
 }

@@ -91,7 +91,7 @@
 
         function processChange() {
             $.ajax({
-                'url': '/api/getAvailableTimes/{{$employee->id}}/' + document.querySelector("#dateSelect").value,
+                'url': '/api/getAvailableTimes/{{$employee->id}}/{{$service->id}}/' + document.querySelector("#dateSelect").value,
                 'datatype': 'json'
             }).done(function (data) {
                 if (data.error) {
