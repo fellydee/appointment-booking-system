@@ -22,7 +22,8 @@ class BookingController extends Controller
 
     public function show($id){
         $service = Service::where('id',$id)->first();
-        return view('booking.show',compact('service'));
+        $business = Business::where('id',$service->business_id)->first();
+        return view('booking.show',compact(['service','business']));
     }
 
 }

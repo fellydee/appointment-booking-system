@@ -127,7 +127,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($employee->roster->timeslots as $timeslot)
+                    @foreach($employee->timeslots as $timeslot)
                         <tr>
                             <td>{{ $timeslot->day }}</td>
                             <td>{{ $timeslot->start_time }}</td>
@@ -163,10 +163,10 @@
             // add timeList from this point
             var index_start = timeList.indexOf(businessDay.open_time);
             var index_stop = timeList.indexOf(businessDay.close_time);
-            startCombos[i].dataset.startIndex = index_start;
-            startCombos[i].dataset.stopIndex = index_stop+1;
+            startCombos[businessDay.day].dataset.startIndex = index_start;
+            startCombos[businessDay.day].dataset.stopIndex = index_stop+1;
             for(var k = index_start; k < index_stop; k++){
-                addOption(startCombos[i],timeList[k])
+                addOption(startCombos[businessDay.day],timeList[k])
             }
         }
 
@@ -178,6 +178,17 @@
             }
 
 
+        })
+
+        $.ajax({
+            url: "/api/getEmployeeHours/{{$employee->id}}",
+            dataType: 'json'
+        }).done(function (data) {
+            data.forEach(function(item,index){
+                var sel = parseInt(startCombos[item.day].dataset.startIndex) - timeList.indexOf(moment(item.start_time).format('LT'));
+                console.log(sel)
+                startCombos[item.day].selectedIndex = sel;
+            })
         })
 
     });

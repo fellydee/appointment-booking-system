@@ -14,8 +14,8 @@ class CreateTimeslotsTable extends Migration
     public function up()
     {
         Schema::create('timeslots', function (Blueprint $table) {
-            $table->primary(['roster_id', 'day']);
-            $table->integer('roster_id');
+            $table->increments('id');
+            $table->integer('employee_id');
             $table->string('day');
             $table->time('start_time');
             $table->time('end_time');

@@ -19,6 +19,16 @@
                     <p>{{ $employee->address }}</p>
                 </div>
             </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Services Provided
+                    </div>
+                    <ul>
+                        @foreach($employee->service as $service)
+                            <li>{{$service->title}}</li>
+                        @endforeach
+                    </ul>
+                </div>
 
             @include('roster.create')
         </div>

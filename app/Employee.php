@@ -18,13 +18,13 @@ class Employee extends Model
         return $this->belongsTo(Business::class);
     }
 
-    public function roster()
+    public function timeslot()
     {
-        return $this->hasOne(Roster::class);
+        return $this->hasMany(Timeslot::class);
     }
 
     public function service(){
-        return $this->belongsToMany(Service::class,EmployeeService::class);
+        return $this->belongsToMany(Service::class,'employee_services');
     }
 
 }
