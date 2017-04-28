@@ -38,7 +38,7 @@ class ServiceController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'duration' => 'required|digits:10',
+            'duration' => 'required',
             'price' => 'required'
         ]);
 
@@ -63,7 +63,7 @@ class ServiceController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
-            'duration' => 'required|digits:10',
+            'duration' => 'required',
             'price' => 'required'
         ]);
 
@@ -74,7 +74,7 @@ class ServiceController extends Controller
 
         $service->save();
 
-        return redirect('/services/' . $service->id);
+        return redirect('/services/');
     }
 
     public function destroy(Service $service)

@@ -45,7 +45,9 @@
 
                         <select name="service">
                             @foreach($services as $service)
-                                <option value="{{ $service->id }}">{{ $service->title }}</option>
+                                @if($service->business->id == $employee->business->id)
+                                    <option value="{{ $service->id }}">{{ $service->title }}</option>
+                                @endif
                             @endforeach
                         </select>
                         <button class="btn btn-primary" type="submit">Assign Service</button>
