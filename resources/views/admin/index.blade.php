@@ -49,6 +49,12 @@
             // page is now ready, initialize the calendar...
             $('#calendar').fullCalendar({
                 defaultView: 'agendaWeek',
+                header:{
+                    left:   'title',
+                    center: '',
+                    right:  ''
+                },
+                firstDay:1,
                 height: 700,
                 businessHours:[
                     @foreach($business->businessHours as $day)
@@ -60,7 +66,7 @@
                     @endforeach
                 ],
                 events: {
-                    url: '/api/getEmployeeHours/{{$business->id}}',
+                    url: '/api/getAllEmployeeHours/{{$business->id}}',
                     success: function (json) {
                         // Make all employees have different colours
                         var names = {};
