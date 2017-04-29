@@ -43,6 +43,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::get('api/getAvailableTimes/{employee_id}/{service_id}/{date}','App\Http\Controllers\ApiController@getAvailableTimes');
         Route::get('api/getEmployeeHours/{employee_id}','App\Http\Controllers\ApiController@getEmployeeHours');
         Route::get('api/getAllEmployeeHours/{business_id}','App\Http\Controllers\ApiController@getAllEmployeeHours');
+        Route::get('api/getAllBookings/{business_id}','App\Http\Controllers\ApiController@getAllBookings');
         //$this->mapApiRoutes();
         $this->mapWebRoutes();
 

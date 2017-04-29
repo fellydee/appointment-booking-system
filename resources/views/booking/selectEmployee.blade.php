@@ -17,7 +17,7 @@
                         <div class="form-group">
                             <label for="employeeSelect">Employee Select</label>
                             <select name="employeeSelect" id="empSelect" class="form-control">
-                                @foreach($service->employee as $employee)
+                                @foreach($service->employees as $employee)
                                     <option value="{{$employee->id}}">{{$employee->fullName()}}</option>
                                 @endforeach
                             </select>

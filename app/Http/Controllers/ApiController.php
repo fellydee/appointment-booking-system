@@ -37,7 +37,7 @@ class ApiController extends Controller
         $user = Auth::user();
         $bookings = array();
         foreach ($user->bookings as $booking) {
-            array_push($bookings, $booking->fullCalendarFormat());
+            array_push($bookings, $booking->fullCalendarFormatCustomer());
         }
         return $bookings;
     }
@@ -67,6 +67,15 @@ class ApiController extends Controller
             }
         }
 
+        return $formatted;
+    }
+
+    public function getAllBookings($business_id){
+        $bookings = Booking::where('business_id',$business_id)->get();
+        $formatted = array();
+        foreach ($bookings as $booking) {
+            array_push($formatted, $booking->fullCalendarFormatOwner());
+        }
 
         return $formatted;
     }

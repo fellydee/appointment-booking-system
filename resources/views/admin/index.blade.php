@@ -5,6 +5,17 @@
     <script src='/js/jquery-3.2.0.min.js'></script>
     <script src='/js//moment.min.js'></script>
     <script src='/js//fullcalendar.min.js'></script>
+    <style>
+        .fc .fc-axis {
+            width: 40px !important;;
+        }
+        .fc-nonbusiness{
+            background: darkgray;
+        }
+        #avalcal td.fc-today{
+            background: none !important;
+        }
+    </style>
 @stop
 
 @section('content')
@@ -39,7 +50,19 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <div id="calendar"></div>
+                    <div id="avalcal"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Bookings
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div id="bookingcal"></div>
                 </div>
             </div>
         </div>
@@ -47,22 +70,19 @@
     <script>
         $(document).ready(function () {
             // page is now ready, initialize the calendar...
-            $('#calendar').fullCalendar({
+            $('#avalcal').fullCalendar({
                 defaultView: 'agendaWeek',
-                header:{
-                    left:   'title',
-                    center: '',
-                    right:  ''
-                },
-                firstDay:1,
-                height: 700,
-                businessHours:[
-                    @foreach($business->businessHours as $day)
-                        {
-                            dow: [{{$day->day+1}}],
-                            start: "{{$day->open_time}}",
-                            end: "{{$day->close_time}}"
-                        },
+                header: false,
+                firstDay: 1,
+                height: 600,
+                allDaySlot: false,
+                businessHours: [
+                        @foreach($business->businessHours as $day)
+                    {
+                        dow: [{{$day->day+1}}],
+                        start: "{{$day->open_time}}",
+                        end: "{{$day->close_time}}"
+                    },
                     @endforeach
                 ],
                 events: {
@@ -75,6 +95,34 @@
                                 names[item.title] = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
                             }
                             item.color = names[item.title];
+                        })
+                    }
+                }
+            })
+
+            $('#bookingcal').fullCalendar({
+                defaultView: 'agendaWeek',
+                firstDay: 1,
+                allDaySlot: false,
+                header: {
+                    right: 'agendaDay,agendaWeek today prev,next'
+                },
+                height: 600,
+                nowIndicator:true,
+                businessHours: [
+                        @foreach($business->businessHours as $day)
+                    {
+                        dow: [{{$day->day+1}}],
+                        start: "{{$day->open_time}}",
+                        end: "{{$day->close_time}}"
+                    },
+                    @endforeach
+                ],
+                events: {
+                    url: '/api/getAllBookings/{{$business->id}}',
+                    success: function (json) {
+                        json.forEach(function (item) {
+                            //item.color = '#' + (0x1000000 + (Math.random()) * 0xffffff).toString(16).substr(1, 6);
                         })
                     }
                 }

@@ -26,7 +26,7 @@ class BookingController extends Controller
             'user_id' => $request->user()->id, //TODO fake this when owner is doing for customer
             'business_id' => $request['business_id'],
             'employee_id' => $request{'employee_id'},
-            'service_id' => $request['employee_id'],
+            'service_id' => $request['service_id'],
             'date' => strftime('%F', strtotime($request['date'])),
             'time' => strftime('%T', strtotime($request['time']))
         ]);

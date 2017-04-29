@@ -10,7 +10,7 @@ class Booking extends Model
 
     public function employee()
     {
-        return $this->hasOne(Employee::class);
+        return $this->hasOne(Employee::class,'id','employee_id');
     }
 
     public function business()
@@ -33,11 +33,21 @@ class Booking extends Model
         return strftime("%D %r", strtotime($this->date . ' ' . $this->time));
     }
 
-    public function fullCalendarFormat()
+    public function fullCalendarFormatCustomer()
     {
         return array(
             'id' => $this->id,
             'title' => $this->service->title . " @ " . $this->service->business->name,
+            'start' => $this->getStartDateTime(),
+            'end' => $this->getEndDateTime()
+        );
+    }
+
+    public function fullCalendarFormatOwner()
+    {
+        return array(
+            'id' => $this->id,
+            'title' => $this->service->title . " with " . $this->employee->fullName(),
             'start' => $this->getStartDateTime(),
             'end' => $this->getEndDateTime()
         );

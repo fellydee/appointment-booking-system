@@ -96,13 +96,17 @@
             }).done(function (data) {
                 if (data.error) {
                     alert(data.error)
+
                     return;
                 }
                 data.forEach(function (item) {
                     addOption(document.querySelector("#timeSelect"), item, item);
                 })
+                if(document.querySelector("#timeSelect").options.length > 0){
+                    document.querySelector("#timeSelect").disabled = false;
+                }
             })
-            document.querySelector("#timeSelect").disabled = false;
+
         }
         function addOption(combo, value, text) {
             var option = document.createElement('option');
