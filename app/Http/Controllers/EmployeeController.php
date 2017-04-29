@@ -21,9 +21,7 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        $services = Service::whereDoesntHave('employees', function ($query) use ($employee) {
-            $query->where('employee_id', $employee->id);
-        })->get();
+        $services = Service::whereDoesntHave('employees')->where('business_id', $employee->business->id)->get();
         return view('employee.show', compact('employee', 'services'));
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Booking;
 use App\Employee;
 use App\Service;
 use Illuminate\Http\Request;
@@ -16,13 +17,13 @@ class ServiceController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['role','auth']);
+        $this->middleware(['role', 'auth']);
     }
 
     public function index()
     {
-        $services = Service::where('business_id',Auth::user()->business_id)->get();
-        return view('service.index',compact('services'));
+        $services = Service::where('business_id', Auth::user()->business_id)->get();
+        return view('service.index', compact('services'));
     }
 
     public function show(Service $service)
@@ -30,11 +31,13 @@ class ServiceController extends Controller
         return view('service.show', compact('service'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('service.create');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
@@ -79,16 +82,24 @@ class ServiceController extends Controller
 
     public function destroy(Service $service)
     {
-        if($service === null) {
-            session()->flash('error','There was a problem removing the service');
-        }else {
-            $service->delete();
-            session()->flash('status', 'Service Removed');
+        if ($service === null) {
+            session()->flash('error', 'There was a problem removing the service');
+            return redirect('/services');
         }
+        // Check there are no bookings using that service
+        $bookings = Booking::where('service_id', $service->id)->get();
+        if (count($bookings) != 0) {
+            session()->flash('error','Service cannot be removed, there are bookings for this service');
+        } else {
+            $service->employees()->detach();
+            $service->delete();
+        }
+
         return redirect('/services');
     }
 
-    public function assign(Request $request)
+    public
+    function assign(Request $request)
     {
         $employee = Employee::find($request->get('employee'));
         $service = Service::find($request->get('service'));
@@ -98,12 +109,17 @@ class ServiceController extends Controller
         return redirect()->back();
     }
 
-    public function unassign(Request $request)
+    public
+    function unassign(Request $request)
     {
         $employee = Employee::find($request->get('employee'));
         $service = Service::find($request->get('service'));
-
-        $employee->services()->detach($service);
+        $bookings = $employee->bookings->where('service_id', $service->id);
+        if (count($bookings) != 0) {
+            session()->flash('error', 'Service cannot be removed. There are bookings present for this employee and service.');
+        } else {
+            $employee->services()->detach($service);
+        }
 
         return redirect()->back();
     }

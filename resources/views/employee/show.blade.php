@@ -8,6 +8,11 @@
                     {{ request()->session()->get('status') }}
                 </div>
             @endif
+                @if(request()->session()->has('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ request()->session()->get('error') }}
+                    </div>
+                @endif
             <div class="panel panel-default">
                 <div class="panel-heading">
                     {{ $employee->fullName() }}
@@ -24,34 +29,44 @@
                         Services Provided
                     </div>
 
-                    @foreach($employee->services as $service)
-                        <form method="POST" action="{{ url('/services/unassign') }}">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="employee" value="{{ $employee->id }}">
-                            <input type="hidden" name="service" value="{{ $service->id }}">
+                    <div class="panel-body">
+                        @foreach($employee->services as $service)
+                            <form method="POST" action="{{ url('/services/unassign') }}">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="employee" value="{{ $employee->id }}">
+                                <input type="hidden" name="service" value="{{ $service->id }}">
 
-                            <ul>
-                                <li>
-                                    {{ $service->title }}
-                                    <button type="submit" class="btn"><span class="glyphicon glyphicon-remove"></span></button>
-                                </li>
-                            </ul>
-                        </form>
-                    @endforeach
+                                <ul>
+                                    <li>
+                                        {{ $service->title }}
+                                        <button type="submit" class="btn"><span class="glyphicon glyphicon-remove"></span></button>
+                                    </li>
+                                </ul>
+                            </form>
+                        @endforeach
+                    </div>
 
-                    <form action="{{ url('/services/assign') }}" method="POST">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="employee" value="{{ $employee->id }}">
+                    <div class="panel-body">
+                        @if(count($services)!=0)
+                            <form action="{{ url('/services/assign') }}" method="POST" >
+                                {{ csrf_field() }}
+                                <input type="hidden" name="employee" value="{{ $employee->id }}">
 
-                        <select name="service">
-                            @foreach($services as $service)
-                                @if($service->business->id == $employee->business->id)
-                                    <option value="{{ $service->id }}">{{ $service->title }}</option>
-                                @endif
-                            @endforeach
-                        </select>
-                        <button class="btn btn-primary" type="submit">Assign Service</button>
-                    </form>
+                                <div class="form-group">
+                                    <select name="service" class="form-control">
+                                        @foreach($services as $service)
+                                            <option value="{{ $service->id }}">{{ $service->title }}</option>
+                                        @endforeach
+                                    </select>
+                                    <button class="btn btn-primary" type="submit">Assign Service</button>
+                                </div>
+                            </form>
+                        @else
+                            <div>
+                                Employee can complete all business services
+                            </div>
+                        @endif
+                    </div>
                 </div>
 
             @include('roster.create')
