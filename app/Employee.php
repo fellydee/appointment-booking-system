@@ -55,6 +55,7 @@ class Employee extends Model
             }
             $current = date("H:i:s", strtotime("+30 minutes", strtotime($current)));
         }
+        array_pop($times); // Remove the last time, this being the time they stop work as nothing can be booked then
         // Get bookings for the date given
         $bookings = $this->bookings->where('date', date("Y-m-d", strtotime($date)));
         foreach ($bookings as $booking) {

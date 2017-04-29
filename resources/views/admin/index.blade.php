@@ -12,7 +12,7 @@
         .fc-nonbusiness{
             background: darkgray;
         }
-        #avalcal td.fc-today{
+        td.fc-today{
             background: none !important;
         }
     </style>
@@ -39,6 +39,9 @@
                 </div>
                 <div class="panel-body">
                     <a href="{{ url('/services') }}">Business Services</a>
+                </div>
+                <div class="panel-body">
+                    <a href="{{ url('/booking/') }}">Make booking for customer</a>
                 </div>
             </div>
         </div>

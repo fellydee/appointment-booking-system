@@ -16,6 +16,9 @@
                     <a href="{{ url('/logout') }}" class="pull-right">Logout</a>
                 </div>
                 <div class="panel-body">
+                    <a href="/booking" class="btn btn-primary">Make Booking</a>
+                </div>
+                <div class="panel-body">
                     <h3>Upcoming bookings</h3>
                     <div id="calendar"></div>
                 </div>

@@ -25,6 +25,10 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function fullName()
+    {
+        return ucwords($this->first_name . ' ' . $this->last_name);
+    }
     public function isBusinessOwner()
     {
         return $this->role == 0;
