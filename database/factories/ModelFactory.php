@@ -31,7 +31,25 @@ $factory->define(App\Service::class, function (Faker\Generator $faker) {
         'business_id' => 1,
         'title' => $faker->word,
         'description' => $faker->sentence,
-        'duration' => $faker->numberBetween(0, 120),
+        'duration' => 30,
         'price' => $faker->numberBetween(0, 60)
+    ];
+});
+
+$factory->define(App\Business::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->name,
+        'address' => $faker->address,
+        'phone' => $faker->phoneNumber,
+        'email' => $faker->numberBetween(0, 120),
+    ];
+});
+
+$factory->define(App\Timeslot::class, function (Faker\Generator $faker) {
+    return [
+        'employee_id' => 1,
+        'day' => $faker->numberBetween(0,6),
+        'start_time' => $faker->time('H:i:s','now'),
+        'end_time' => $faker->time('H:i:s','now'),
     ];
 });
