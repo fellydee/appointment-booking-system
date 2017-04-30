@@ -9,16 +9,20 @@
     <p>
     Appointment booking system can be used for free by any business. 
     <br> 
-    Millions of people around the world all use 
+    Millions of people around the world all use Appointment Booking system
+    <br>
+    to organise appointments with hundreds of different businesses such as
+    <br>
+    hairdressers, gyms, dentists and veterinary clinics 
     </p>
 </div>
 
 <div class="Login">
     @if (Auth::guest())
-    <a id = "Login" href="{{ url('/login') }}"><button class= "btn btn-primary">Login</button></a>
-    <a id = "Register" href="{{ url('/register') }}"><button class= "btn btn-primary">Register</button></a>
+    <!--<a id = "Login" href="{{ url('/login') }}"><button class= "btn btn-primary">Login</button></a>-->
+    <a id = "Register" href="{{ url('/register') }}"><button class= "btn btn-primary btn-lg">Register Now</button></a>
     @else
-    
+    <a id = "Register" href="{{ url('/home') }}"><button class= "btn btn-primary btn-lg">View Dashboard</button></a>    
     @endif
 </div>
 
@@ -41,7 +45,7 @@
 .introText {
     text-align: center;
     padding-top: 90px;
-    padding-bottom: 150px;
+    padding-bottom: 80px;
     color:white;
     font-size:15px;
 }
