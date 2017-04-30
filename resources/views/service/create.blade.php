@@ -6,18 +6,7 @@
 
 @section('content')
     <div class="row">
-        <!--<div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Service Creator
-                    <a href="{{ url('/services') }}" class="pull-right">Back</a>
-                </div>
-            </div>
-<<<<<<< HEAD
-        </div>-->
         <div class="col-md-8 col-md-offset-2">
-            <!--<a href="/services/create" class="btn btn-primary pull-right">New Service</a>-->
-<!--=======-->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Service Creator
@@ -56,10 +45,6 @@
                         <div class="form-group{{ $errors->has('duration') ? ' has-error' : '' }}">
                             <label for="duration" class="col-md-4 control-label">Duration</label>
                             <div class="col-md-6">
-<<<<<<< HEAD
-                                <input type="text" class="form-control" placeholder="Service duration in minutes"
-                                       name="duration" value="{{ old('duration') }}" required>
-=======
                                 <select id="duration" type="text" class="form-control"
                                         name="duration" required>
                                     <option value="30">30 Minutes</option>
@@ -67,7 +52,6 @@
                                     <option value="90">90 Minutes</option>
                                     <option value="120">120 Minutes</option>
                                 </select>
->>>>>>> development
                                 @if ($errors->has('duration'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('duration') }}</strong>
