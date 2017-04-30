@@ -22,7 +22,7 @@ class LoginTest extends TestCase
 
     public function test_user_can_view_dashboard_when_logged_in()
     {
-        $user = factory(User::class)->create();
+        $user = factory(User::class)->create(['role' => 1]);
 
         $response = $this->actingAs($user)
             ->get('/home');
