@@ -42,28 +42,23 @@ class BookingController extends Controller
 
     public function setCustomer(Request $request)
     {
-        $user = null;
-        if (isset($request['customer_id'])) {
-            $user = User::where('id', $request['customer_id'])->first();
-            // Doing for an existing customer
-        } else {
-            $this->validate($request, [
-                'first_name' => 'required|alpha|min:1|max:60',
-                'last_name' => 'required|alpha|min:1|max:60',
-                'email' => 'required|email|unique:users,email',
-                'phone' => 'required|digits:10',
-                'address' => 'required|max:80'
-            ]);
-            $user = User::create([
-                'first_name' => $request['first_name'],
-                'last_name' => $request['last_name'],
-                'email' => $request['email'],
-                'phone' => $request['phone'],
-                'address' => $request['address'],
-                'password' => bcrypt($request['email']),
-                'role' => 1
-            ]);
-        }
+
+        $this->validate($request, [
+            'first_name' => 'required|alpha|min:1|max:60',
+            'last_name' => 'required|alpha|min:1|max:60',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'required|digits:10',
+            'address' => 'required|max:80'
+        ]);
+        $user = User::create([
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+            'email' => $request['email'],
+            'phone' => $request['phone'],
+            'address' => $request['address'],
+            'password' => bcrypt($request['email']),
+            'role' => 1
+        ]);
         session()->put('customer_id', $user->id);
         $business = $request->user()->business;
         return view('booking.serviceSelect', compact('business'));
