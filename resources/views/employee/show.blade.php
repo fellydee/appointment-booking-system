@@ -19,9 +19,9 @@
                     <a href="/employees/{{ $employee->id }}/edit" class="pull-right">Edit</a>
                 </div>
                 <div class="panel-body">
-                    <p>{{ $employee->email }}</p>
-                    <p>{{ $employee->phone }}</p>
-                    <p>{{ $employee->address }}</p>
+                    <p>Email: {{ $employee->email }}</p>
+                    <p>Phone: {{ $employee->phone }}</p>
+                    <p>Address: {{ $employee->address }}</p>
                 </div>
             </div>
                 <div class="panel panel-default">
@@ -35,18 +35,16 @@
                                 {{ csrf_field() }}
                                 <input type="hidden" name="employee" value="{{ $employee->id }}">
                                 <input type="hidden" name="service" value="{{ $service->id }}">
-
                                 <ul>
                                     <li>
                                         {{ $service->title }}
-                                        <button type="submit" class="btn"><span class="glyphicon glyphicon-remove"></span></button>
+                                        <button type="submit" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-remove"></span></button>
                                     </li>
                                 </ul>
+                                <br>
                             </form>
                         @endforeach
-                    </div>
 
-                    <div class="panel-body">
                         @if(count($employee->business->service) == count($employee->services))
                             <h4>Employee can complete all business services</h4>
                         @else
@@ -60,13 +58,13 @@
                                             <option value="{{ $service->id }}">{{ $service->title }}</option>
                                         @endforeach
                                     </select>
-                                    <button class="btn btn-primary" type="submit">Assign Service</button>
+                                    <br>
+                                    <button class="btn btn-primary pull-right" type="submit">Assign Service</button>
                                 </div>
                             </form>
                         @endif
                     </div>
                 </div>
-
             @include('roster.create')
         </div>
     </div>
