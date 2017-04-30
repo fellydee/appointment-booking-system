@@ -15,6 +15,7 @@
                         <a href="/employees/{{ $employee->id }}">
                             {{ $employee->fullName() }}
                         </a>
+                        <a href="/employees/{{ $employee->id }}" class="pull-right">Edit</a>
                     </div>
                     <div class="panel-body">
                         <p>Email:   {{ $employee->email }}</p>
