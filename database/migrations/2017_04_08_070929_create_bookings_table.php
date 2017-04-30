@@ -17,9 +17,10 @@ class CreateBookingsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('business_id');
-            $table->string('title');
-            $table->datetime('start');
-            $table->datetime('end');
+            $table->integer('employee_id');
+            $table->integer('service_id');
+            $table->date('date');
+            $table->time('time');
             $table->timestamps();
         });
     }

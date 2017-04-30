@@ -9,20 +9,29 @@
                     <a href="{{ url('/admin') }}" class="pull-right">Back</a>
                 </div>
             </div>
-            @foreach($employees as $employee)
+            @forelse($employees as $employee)
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <a href="/employees/{{ $employee->id }}">
                             {{ $employee->fullName() }}
                         </a>
+                        <a href="/employees/{{ $employee->id }}" class="pull-right">Edit</a>
                     </div>
                     <div class="panel-body">
-                        <p>{{ $employee->email }}</p>
-                        <p>{{ $employee->phone }}</p>
-                        <p>{{ $employee->address }}</p>
+                        <p>Email:   {{ $employee->email }}</p>
+                        <p>Phone:   {{ $employee->phone }}</p>
+                        <p>Address: {{ $employee->address }}</p>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p>Currently no employees added</p>
+                    </div>
+                </div>
+            @endforelse
+
+
         </div>
         <div class="col-md-8 col-md-offset-2">
             <a href="/employees/create" class="btn btn-primary pull-right">New Employee</a>

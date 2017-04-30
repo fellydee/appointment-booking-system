@@ -98,8 +98,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'password' => [
+            'regex' => 'Password must be at least 8 characters long, contain at least one upper and lower case letter and at least one digit',
         ],
     ],
 

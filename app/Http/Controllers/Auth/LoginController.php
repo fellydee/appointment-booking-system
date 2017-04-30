@@ -38,9 +38,12 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
     }
 
-
-
-
+    /**
+     * Returns if the user is authed
+     * @param Request $request
+     * @param $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function authenticated(Request $request, $user)
     {
         if ($user->isBusinessOwner())

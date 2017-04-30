@@ -18,10 +18,7 @@ class RegisterTest extends DuskTestCase
             ->type('last_name','Garipoli')
             ->type('email', 'email@gmail.com')
             ->type('phone','0411122200')
-            ->type('address','124 La Trobe St')
-            ->type('city','Melbourne')
-            ->select('state','VIC')
-            ->type('post_code','3000')
+            ->type('address','124 La Trobe St, Melbourne VIC 3000')
             ->type('password', 'abcdEFGH1234')
             ->type('password_confirmation', 'abcdEFGH1234')
             ->press('Register')
@@ -37,10 +34,7 @@ class RegisterTest extends DuskTestCase
             ->type('last_name','Garipoli')
             ->type('email', 'email@gmail.com')
             ->type('phone','0411122200')
-            ->type('address','124 La Trobe St')
-            ->type('city','Melbourne')
-            ->select('state','VIC')
-            ->type('post_code','3000')
+            ->type('address','124 La Trobe St, Melbourne VIC 3000')
             ->type('password', 'abcdEFGH1234')
             ->type('password_confirmation', '4321HGFEdcba')
             ->press('Register')
@@ -48,41 +42,51 @@ class RegisterTest extends DuskTestCase
         });
     }
 
-    public function test_user_registration_post_code_incorrect()
+    public function test_user_registration_password_incorrect_format_no_uppercase()
     {
         $this->browse(function ($browser) {
             $browser->visit('/register')
-            ->type('first_name', 'Aiden')
-            ->type('last_name','Garipoli')
-            ->type('email', 'email@gmail.com')
-            ->type('phone','0411122200')
-            ->type('address','124 La Trobe St')
-            ->type('city','Melbourne')
-            ->select('state','VIC')
-            ->type('post_code','30002')
-            ->type('password', 'abcdEFGH1234')
-            ->type('password_confirmation', 'abcdEFGH1234')
-            ->press('Register')
-            ->assertPathIs('/home');
+                ->type('first_name', 'Aiden')
+                ->type('last_name','Garipoli')
+                ->type('email', 'email@gmail.com')
+                ->type('phone','0411122200')
+                ->type('address','124 La Trobe St, Melbourne VIC 3000')
+                ->type('password', '1234asdf')
+                ->type('password_confirmation', '1234asdf')
+                ->press('Register')
+                ->assertPathIs('/register');
         });
     }
 
-    public function test_user_registration_state_not_selected()
+    public function test_user_registration_password_incorrect_format_no_lowercase()
     {
         $this->browse(function ($browser) {
             $browser->visit('/register')
-            ->type('first_name', 'Aiden')
-            ->type('last_name','Garipoli')
-            ->type('email', 'email@gmail.com')
-            ->type('phone','0411122200')
-            ->type('address','124 La Trobe St')
-            ->type('city','Melbourne')
-            ->select('state','')
-            ->type('post_code','30002')
-            ->type('password', 'abcdEFGH1234')
-            ->type('password_confirmation', 'abcdEFGH1234')
-            ->press('Register')
-            ->assertPathIs('/home');
+                ->type('first_name', 'Aiden')
+                ->type('last_name','Garipoli')
+                ->type('email', 'email@gmail.com')
+                ->type('phone','0411122200')
+                ->type('address','124 La Trobe St, Melbourne VIC 3000')
+                ->type('password', '1234ASDF')
+                ->type('password_confirmation', '1234ASDF')
+                ->press('Register')
+                ->assertPathIs('/register');
+        });
+    }
+
+    public function test_user_registration_password_incorrect_format_length()
+    {
+        $this->browse(function ($browser) {
+            $browser->visit('/register')
+                ->type('first_name', 'Aiden')
+                ->type('last_name','Garipoli')
+                ->type('email', 'email@gmail.com')
+                ->type('phone','0411122200')
+                ->type('address','124 La Trobe St, Melbourne VIC 3000')
+                ->type('password', '12asAD')
+                ->type('password_confirmation', '12asAD')
+                ->press('Register')
+                ->assertPathIs('/register');
         });
     }
 }

@@ -1,7 +1,6 @@
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                 <span class="sr-only">Toggle Navigation</span>
                 <span class="icon-bar"></span>
@@ -9,7 +8,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ url('') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
         </div>
@@ -22,11 +21,14 @@
 
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::guest())
-                    <li><a href="{{ route('login') }}">Login</a></li>
-                    <li><a href="{{ route('register') }}">Register</a></li>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{ route('register') }}"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+                        <li><a href="{{ route('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </ul>
                 @else
+                    <li><a href="{{ url('/home') }}"><span class="glyphicon glyphicon-home"></span> Dashboard</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> 
                             {{ Auth::user()->first_name }} <span class="caret"></span>
                         </a>
 
@@ -34,6 +36,20 @@
                             <li>
                                 <a href="{{ url('logout') }}">Logout</a>
                             </li>
+                            @if (Auth::user()->role === 0)
+                            <li>
+                                <a href="{{ url('employees') }}">Employees</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('hours') }}">Hours</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('services') }}">Services</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('booking') }}">Make Booking</a>
+                            </li>
+                            @endif
                         </ul>
                     </li>
                 @endif

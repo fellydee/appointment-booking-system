@@ -15,10 +15,10 @@ class CreateBusinessesTable extends Migration
     {
         Schema::create('businesses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->time('start_hour');
-            $table->time('end_hour');
-            $table->integer('user_id');
+            $table->string('name');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('email');
             $table->timestamps();
         });
     }

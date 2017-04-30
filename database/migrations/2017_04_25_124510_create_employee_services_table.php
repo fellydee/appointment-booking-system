@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTimeslotsTable extends Migration
+class CreateEmployeeServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateTimeslotsTable extends Migration
      */
     public function up()
     {
-        Schema::create('timeslots', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('employee_services', function (Blueprint $table) {
+//            $table->increments('id');
+            $table->primary(['employee_id', 'service_id']);
             $table->integer('employee_id');
-            $table->string('day');
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->integer('service_id');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateTimeslotsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('timeslots');
+        Schema::dropIfExists('employee_services');
     }
 }
