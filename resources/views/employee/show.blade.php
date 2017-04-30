@@ -47,7 +47,9 @@
                     </div>
 
                     <div class="panel-body">
-                        @if(count($services)!=0)
+                        @if(count($employee->business->service) == count($employee->services))
+                            <h4>Employee can complete all business services</h4>
+                        @else
                             <form action="{{ url('/services/assign') }}" method="POST" >
                                 {{ csrf_field() }}
                                 <input type="hidden" name="employee" value="{{ $employee->id }}">
@@ -61,10 +63,6 @@
                                     <button class="btn btn-primary" type="submit">Assign Service</button>
                                 </div>
                             </form>
-                        @else
-                            <div>
-                                Employee can complete all business services
-                            </div>
                         @endif
                     </div>
                 </div>

@@ -70,16 +70,5 @@ class Employee extends Model
         // Return array of times
     }
 
-    public function isBookableAt($date, $time, $length)
-    {
-        if (!$this->isWorking($date)) {
-            return false;
-        }
-        $bookings = $this->bookings->where('date', date("Y-m-d", strtotime($date)));
-        foreach ($bookings as $booking) {
-            if (strtotime($booking->time) != strtotime($time)) {
-            }
-        }
-    }
 
 }
