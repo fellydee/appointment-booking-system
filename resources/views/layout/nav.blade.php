@@ -40,6 +40,15 @@
                             <li>
                                 <a href="{{ url('employees') }}">Employees</a>
                             </li>
+                            <li>
+                                <a href="{{ url('hours') }}">Hours</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('services') }}">Services</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('booking') }}">Make Booking</a>
+                            </li>
                             @endif
                         </ul>
                     </li>
