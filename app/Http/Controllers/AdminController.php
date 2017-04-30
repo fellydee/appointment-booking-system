@@ -13,8 +13,13 @@ class AdminController extends Controller
         $this->middleware('role');
     }
 
+    /**
+     * Returns the admin dashboard
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
+        // Clears the booking for customer information
         if (!empty(session('customer_id'))) {
             session()->forget('customer_id');
         }

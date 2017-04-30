@@ -14,30 +14,56 @@ class EmployeeController extends Controller
         $this->middleware('role');
     }
 
+    /**
+     * Returns the main employee management page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
+        // Gets the employees of the currently logged in business owner
         $employees = Employee::where('business_id',Auth::user()->business_id)->get();
         return view('employee.index', compact('employees'));
     }
 
+    /**
+     * Returns a page showing a single employees details
+     * @param Employee $employee
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Employee $employee)
     {
+        // Gets all services the business offers that the employee does not
         $services = Service::whereDoesntHave('employees', function ($query) use ($employee) {
             $query->where('employee_id', $employee->id);
         })->where('business_id',$employee->business_id)->get();
+
         return view('employee.show', compact('employee', 'services'));
     }
 
+    /**
+     * Returns the create employee page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('employee.create');
     }
 
+    /**
+     * Returns the edit employee page
+     * @param Employee $employee
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(Employee $employee)
     {
         return view('employee.edit', compact('employee'));
     }
 
+    /**
+     * Validated the create request and saved to the database and redirects
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -62,6 +88,12 @@ class EmployeeController extends Controller
         return redirect('/employees');
     }
 
+    /**
+     * updates the given employee with the given information
+     * @param Request $request
+     * @param Employee $employee
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(Request $request, Employee $employee)
     {
         $this->validate($request, [

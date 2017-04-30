@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class RosterController extends Controller
 {
+    /**
+     * Validates and stores the roster information
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
     {
         // Validate request
@@ -16,10 +21,11 @@ class RosterController extends Controller
         $businessHours = BusinessHours::where('business_id', $request->user()->business_id)->get();
 
         for ($i = 0; $i < count($days); $i++) {
+            // If the start combo is not set it means the value is disabled meaning the business is closed
             if (!isset($request[$days[$i] . '_start'])) {
                 continue;
             }
-
+            // If the employee is notworking don't continue validating.
             $start = $request[$days[$i] . '_start'];
             if ($start == 'notworking') {
                 continue;
@@ -39,13 +45,14 @@ class RosterController extends Controller
 
 
         }
+        // Store the timeslots
         Timeslot::where('employee_id', $request['employeeid'])->delete(); // Remove all old hour records
-        $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
         for ($i = 0; $i < count($days); $i++) {
+            // If the start combo is not set it means the value is disabled meaning the business is closed
             if (!isset($request[$days[$i] . '_start'])) {
                 continue;
             }
-
+            // If the employee is notworking don't save the timeslot
             if ($request[$days[$i] . '_start'] != "notworking") {
                 Timeslot::create([
                     'employee_id' => $request['employeeid'],
@@ -59,11 +66,4 @@ class RosterController extends Controller
         return redirect()->back();
     }
 
-    public
-    function update(Request $request)
-    {
-        $this->validate($request, [
-            ''
-        ]);
-    }
 }
