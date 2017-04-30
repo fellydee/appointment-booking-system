@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <!--<div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Service Creator
@@ -14,13 +14,14 @@
                 </div>
             </div>
 <<<<<<< HEAD
-        </div>
+        </div>-->
         <div class="col-md-8 col-md-offset-2">
-            <a href="/services/create" class="btn btn-primary pull-right">New Service</a>
-=======
+            <!--<a href="/services/create" class="btn btn-primary pull-right">New Service</a>-->
+<!--=======-->
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Service Creator
+                    <a href="{{ url('/services') }}" class="pull-right">Back</a>
                 </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/services') }}">
@@ -42,7 +43,7 @@
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                             <label for="description" class="col-md-4 control-label">Description</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control" placeholder="Description of service"
                                        name="description" value="{{ old('description') }}" required>
                                 @if ($errors->has('description'))
                                     <span class="help-block">
@@ -55,7 +56,7 @@
                         <div class="form-group{{ $errors->has('duration') ? ' has-error' : '' }}">
                             <label for="duration" class="col-md-4 control-label">Duration</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control" placeholder="Service duration in minutes"
                                        name="duration" value="{{ old('duration') }}" required>
                                 @if ($errors->has('duration'))
                                     <span class="help-block">
@@ -68,7 +69,7 @@
                         <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
                             <label for="price" class="col-md-4 control-label">Price</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control" placeholder="Price of service"
                                        name="price" value="{{ old('price') }}" required>
                                 @if ($errors->has('price'))
                                     <span class="help-block">

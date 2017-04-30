@@ -31,7 +31,8 @@
                                 <th>Description</th>
                                 <th>Duration (mins)</th>
                                 <th>Price</th>
-                                <th>Action</th>
+                                <th>Delete</th>
+                                <th>Edit</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -41,15 +42,17 @@
                                     <td class="col-md-5">{{$service->description}}</td>
                                     <td class="col-md-2">{{$service->duration}}</td>
                                     <td class="col-md-1">{{$service->price}}</td>
-                                    <td class="col-md-2">
-                                        <form method="POST" class="pull-left" action="/services/{{$service->id}}">
+                                    <td class="col-md-1">
+                                        <form method="POST" action="/services/{{$service->id}}">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn"><span
+                                            <button type="submit" class="btn btn-danger btn-sm"><span
                                                         class="glyphicon glyphicon-remove"></span>
                                             </button>
                                         </form>
-                                        <a href="/services/{{$service->id}}/edit" class="btn pull-right"><span class="glyphicon glyphicon-edit"></span></a>
+                                    </td>
+                                    <td class="col-md-1">
+                                        <a href="/services/{{$service->id}}/edit" class="btn "><span class="glyphicon glyphicon-edit"></span></a>
                                     </td>
                                 </tr>
                             @endforeach
