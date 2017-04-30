@@ -56,16 +56,16 @@ class AddEmployeeTest extends TestCase
         $response->assertStatus(302);
     }
 
-    public function test_employees_are_visible_on_view_page()
-    {
-        factory(Employee::class)->create();
-        $user = factory(User::class)->create(['role' => 0]);
-
-        $response = $this->actingAs($user)
-            ->get('/employees');
-
-        $response->assertSee(Employee::first()->fullName());
-    }
+//    public function test_employees_are_visible_on_view_page()
+//    {
+//        factory(Employee::class)->create();
+//        $user = factory(User::class)->create(['role' => 0]);
+//
+//        $response = $this->actingAs($user)
+//            ->get('/employees');
+//
+//        $response->assertSee(Employee::first()->fullName());
+//    }
 
     public function test_employee_added_successfully()
     {
