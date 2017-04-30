@@ -8,28 +8,6 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Booking for existing customer</h3>
-                </div>
-                <div class="panel-body">
-                    <form method="POST" action="/booking/customer/">
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <select name="customer_id" class="form-control">
-                                @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->fullName()}} - {{$user->email}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-primary pull-right" type="submit">Make Booking</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
                     <h3 class="panel-title">Booking for new customer</h3>
                 </div>
                 <div class="panel-body">

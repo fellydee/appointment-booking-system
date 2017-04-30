@@ -56,8 +56,18 @@
                         <div class="form-group{{ $errors->has('duration') ? ' has-error' : '' }}">
                             <label for="duration" class="col-md-4 control-label">Duration</label>
                             <div class="col-md-6">
+<<<<<<< HEAD
                                 <input type="text" class="form-control" placeholder="Service duration in minutes"
                                        name="duration" value="{{ old('duration') }}" required>
+=======
+                                <select id="duration" type="text" class="form-control"
+                                        name="duration" required>
+                                    <option value="30">30 Minutes</option>
+                                    <option value="60">60 Minutes</option>
+                                    <option value="90">90 Minutes</option>
+                                    <option value="120">120 Minutes</option>
+                                </select>
+>>>>>>> development
                                 @if ($errors->has('duration'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('duration') }}</strong>

@@ -9,11 +9,11 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">
                         Booking {{$service->title}} at {{$business->name}}
-                    </h3>
+                    <a href="{{ url('/booking') }}" class="pull-right">Cancel</a>
                 </div>
                 <div class="panel-body">
+                    @if(count($service->employees) !=0)
                         <div class="form-group">
                             <label for="employeeSelect">Employee Select</label>
                             <select name="employeeSelect" id="empSelect" class="form-control">
@@ -23,9 +23,12 @@
                             </select>
                             <a type="submit" class="btn btn-primary" onclick="loadPage();">Next</a>
                         </div>
+                    @else
+                        <h3>There are no employees available to complete this service</h3>
+                    @endif
                     <script>
-                        function loadPage(){
-                            location.href = location.href + "/employee/"+document.querySelector("#empSelect").value;
+                        function loadPage() {
+                            location.href = location.href + "/employee/" + document.querySelector("#empSelect").value;
                         }
                     </script>
                 </div>

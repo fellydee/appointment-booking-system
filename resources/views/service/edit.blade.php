@@ -4,7 +4,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Edit Service</div>
+                <div class="panel-heading">
+                    Edit Service
+                    <a href="{{url('/services')}}" class="pull-right">Back</a>
+                </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="/services/{{ $service->id }}">
                         {{ csrf_field() }}
@@ -39,8 +42,16 @@
                         <div class="form-group{{ $errors->has('duration') ? ' has-error' : '' }}">
                             <label for="duration" class="col-md-4 control-label">Duration</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control"
-                                       name="duration" value="{{ $service->duration }}" required>
+                                <select id="duration" type="text" class="form-control"
+                                        name="duration" required @if(count($service->booking) != 0) disabled @endif>
+                                    <option value="30">30 Minutes</option>
+                                    <option value="60">60 Minutes</option>
+                                    <option value="90">90 Minutes</option>
+                                    <option value="120">120 Minutes</option>
+                                </select>
+                                <script>
+                                    document.querySelector("#duration").value = "{{$service->duration}}";
+                                </script>
                                 @if ($errors->has('duration'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('duration') }}</strong>
