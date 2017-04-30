@@ -37,12 +37,11 @@ class RosterController extends Controller
             session()->flash('error', 'An error occurred when processing your request, please try again');
             return redirect()->back();
 
+
         }
         Timeslot::where('employee_id', $request['employeeid'])->delete(); // Remove all old hour records
         $days = array('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday');
-        for ($i = 0;
-             $i < count($days);
-             $i++) {
+        for ($i = 0; $i < count($days); $i++) {
             if (!isset($request[$days[$i] . '_start'])) {
                 continue;
             }

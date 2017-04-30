@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Employee;
+use App\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -14,13 +16,14 @@ class EmployeeController extends Controller
 
     public function index()
     {
-        $employees = Employee::all();
+        $employees = Employee::where('business_id',Auth::user()->business_id)->get();
         return view('employee.index', compact('employees'));
     }
 
     public function show(Employee $employee)
     {
-        return view('employee.show', compact('employee'));
+        $services = Service::whereDoesntHave('employees')->where('business_id', $employee->business->id)->get();
+        return view('employee.show', compact('employee', 'services'));
     }
 
     public function create()

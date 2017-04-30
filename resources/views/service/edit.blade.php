@@ -1,36 +1,20 @@
 @extends('app')
 
-@section('head')
-
-@stop
-
 @section('content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    Service Creator
-                    <a href="{{ url('/services') }}" class="pull-right">Back</a>
-                </div>
-            </div>
-<<<<<<< HEAD
-        </div>
-        <div class="col-md-8 col-md-offset-2">
-            <a href="/services/create" class="btn btn-primary pull-right">New Service</a>
-=======
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Service Creator
-                </div>
+                <div class="panel-heading">Edit Service</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/services') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="/services/{{ $service->id }}">
                         {{ csrf_field() }}
+                        {{ method_field('PATCH') }}
 
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-4 control-label">Title</label>
+                            <label for="title" class="col-md-4 control-label">First Name</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control"
-                                       name="title" value="{{ old('title') }}" required autofocus>
+                                       name="title" value="{{ $service->title }}" required autofocus>
                                 @if ($errors->has('title'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('title') }}</strong>
@@ -43,7 +27,7 @@
                             <label for="description" class="col-md-4 control-label">Description</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control"
-                                       name="description" value="{{ old('description') }}" required>
+                                       name="description" value="{{ $service->description }}" required>
                                 @if ($errors->has('description'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('description') }}</strong>
@@ -56,7 +40,7 @@
                             <label for="duration" class="col-md-4 control-label">Duration</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control"
-                                       name="duration" value="{{ old('duration') }}" required>
+                                       name="duration" value="{{ $service->duration }}" required>
                                 @if ($errors->has('duration'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('duration') }}</strong>
@@ -69,7 +53,7 @@
                             <label for="price" class="col-md-4 control-label">Price</label>
                             <div class="col-md-6">
                                 <input type="text" class="form-control"
-                                       name="price" value="{{ old('price') }}" required>
+                                       name="price" value="{{ $service->price }}" required>
                                 @if ($errors->has('price'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('price') }}</strong>
@@ -80,13 +64,12 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">Add Service</button>
+                                <button type="submit" class="btn btn-primary">Save Service</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
->>>>>>> development
         </div>
     </div>
 @stop

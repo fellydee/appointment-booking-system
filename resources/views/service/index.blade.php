@@ -37,7 +37,7 @@
                             <tbody>
                             @foreach($services as $service)
                                 <tr>
-                                    <td class="col-md-2">{{$service->title}}</td>
+                                    <td class="col-md-2"><a href="{{ url('/services/'.$service->id) }}">{{ $service->title }}</a></td>
                                     <td class="col-md-5">{{$service->description}}</td>
                                     <td class="col-md-2">{{$service->duration}}</td>
                                     <td class="col-md-1">{{$service->price}}</td>
@@ -49,7 +49,7 @@
                                                         class="glyphicon glyphicon-remove"></span>
                                             </button>
                                         </form>
-                                        <a href="/services/{{$service->id}}" class="btn pull-right"><span class="glyphicon glyphicon-edit"></span></a>
+                                        <a href="/services/{{$service->id}}/edit" class="btn pull-right"><span class="glyphicon glyphicon-edit"></span></a>
                                     </td>
                                 </tr>
                             @endforeach

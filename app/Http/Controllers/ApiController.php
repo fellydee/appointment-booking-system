@@ -17,7 +17,7 @@ class ApiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['web','auth']);
+        $this->middleware(['web', 'auth']);
 
     }
 //    public function myBookings()
@@ -35,61 +35,118 @@ class ApiController extends Controller
     public function myBookings()
     {
         $user = Auth::user();
-        $booking = Booking::where('user_id', Auth::id())->get();
+        $bookings = array();
+        foreach ($user->bookings as $booking) {
+            array_push($bookings, $booking->fullCalendarFormatCustomer());
+        }
+        return $bookings;
     }
 
 
-
-    private function processBooking($booking){
+    private function processBooking($booking)
+    {
 
 
     }
 
-    public function getBusinessInfo($id){
-        return Business::with(['businesshours','service'])
-            ->where('id',$id)->get();
+    public function getBusinessInfo($id)
+    {
+        return Business::with(['businesshours', 'service'])
+            ->where('id', $id)->get();
     }
 
 
-    public function getEmployeeHours($id){
-        return Timeslot::where('employee_id',$id)->get();
+    public function getAllEmployeeHours($business_id)
+    {
+        $business = Business::where('id', $business_id)->first();
+
+        $formatted = array();
+        foreach ($business->employees as $employee) {
+            foreach ($employee->timeslots as $timeslot) {
+                array_push($formatted, $timeslot->fullCalendarFormat());
+            }
+        }
+
+        return $formatted;
     }
 
-    public function getBusinesses(){
+    public function getAllBookings($business_id){
+        $bookings = Booking::where('business_id',$business_id)->get();
+        $formatted = array();
+        foreach ($bookings as $booking) {
+            array_push($formatted, $booking->fullCalendarFormatOwner());
+        }
+
+        return $formatted;
+    }
+
+    public function getEmployeeHours($employee_id)
+    {
+        $employee = Employee::where('id', $employee_id)->first();
+
+        return $employee->timeslots;
+    }
+
+    public function getBusinesses()
+    {
         return Business::all();
     }
 
-    public function test(){
-        return Employee::with(['timeslot','service'])->get();
+    public function test()
+    {
+        return Timeslot::all()[0]->fullCalendarFormat();
     }
 
 
-    public function getAvailableTimes($id, $date){
-        // Check that the service exists
-        $service = Service::where('id',$id)->first();
-        if($service == null){
-            return "ERROR Service does not exist";
-        }
-        // Check the business exists
-        $business = Business::where('id', $service->business_id)->first();
-        if($business == null) {
-            return "ERROR Business not found";
-        }
-        // TODO Validate the date
-        // Get employees that are working on that day
+    public function getAvailableTimes($employee_id, $service_id, $date)
+    {
+        $employee = Employee::where('id', $employee_id)->first();
+        $service = Service::where('id', $service_id)->first();
         $dayNum = date('w', strtotime($date)) - 1;
-        if($dayNum < 0 || $dayNum > 6){
+        if ($dayNum < 0 || $dayNum > 6) {
             return "ERROR";
         }
+        if (!$employee->isWorking($date)) {
+            return response()->json([
+                'error' => 'Not working that day'
+            ]);
+        }
+        $times = $employee->timesAvailable($date);
+        if (count($times) == 0) {
+            return response()->json([
+                'error' => 'All booked for that day'
+            ]);
+        }
 
+        $serviceTimes = array();
 
+        // Remove all slots that cannot support the service length
+        $slotsRequired = $service->duration / 30;
+        if ($slotsRequired > 1) {
+            foreach ($times as $time) {
+                $valid = true;
+                for ($i = 0; $i < $slotsRequired; $i++) {
+                    $current = $current = date("H:i:s", strtotime("+30 minutes", strtotime($time)));
+                    $val = array_search($current, $times);
+                    if ($val == false) {
+                        $valid = false;
+                    }
 
-        // Get available times for that service on that day
-        // Depends on:
-            // Open hours
-            // Other bookings
-            // Employee aval + able to complete service
-            // Duration fits
+                }
+                if ($valid == true) {
+                    array_push($serviceTimes, $time);
+                }
+            }
+        } else {
+            $serviceTimes = $times;
+        }
+
+        // Format the times
+        $formattedTimes = array();
+        foreach ($serviceTimes as $time) {
+            array_push($formattedTimes, date("g:i A", strtotime($time)));
+        }
+        return $formattedTimes;
     }
 
 

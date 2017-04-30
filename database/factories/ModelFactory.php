@@ -25,3 +25,13 @@ $factory->define(App\Employee::class, function (Faker\Generator $faker) {
         'business_id' => '1'
     ];
 });
+
+$factory->define(App\Service::class, function (Faker\Generator $faker) {
+    return [
+        'business_id' => 1,
+        'title' => $faker->word,
+        'description' => $faker->sentence,
+        'duration' => $faker->numberBetween(0, 120),
+        'price' => $faker->numberBetween(0, 60)
+    ];
+});

@@ -1,10 +1,6 @@
 <script src="/js/moment.min.js"></script>
 <script src="/js/jquery-3.2.0.min.js"></script>
-@if(request()->session()->has('error'))
-    <div class="alert alert-danger" role="alert">
-        {{ request()->session()->get('error') }}
-    </div>
-@endif
+
 <div class="panel panel-default">
     <div class="panel-heading">
         Roster

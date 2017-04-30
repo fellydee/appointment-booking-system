@@ -25,13 +25,23 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function fullName()
+    {
+        return ucwords($this->first_name . ' ' . $this->last_name);
+    }
     public function isBusinessOwner()
     {
         return $this->role == 0;
     }
 
+    public function business()
+    {
+        return $this->belongsTo(Business::class);
+    }
 
-
+    public function bookings(){
+        return $this->hasMany(Booking::class);
+    }
 
 
     public function getRememberTokenName()
