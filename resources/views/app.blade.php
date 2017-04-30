@@ -27,11 +27,10 @@
 <style>
 
 body {
-    background-image: url("http://senamalancha.com/(S(nlannpjrpoo3ajpflx5hfb2t))/logindata/bg-8.jpg");
+    background-image: url("/img/background.jpg");
     background-size: cover;
     background-attachment: fixed;
-    background-color: rgba(0,0,0,.55);
-    background-blend-mode: multiply;
+    background-position: center center;
 }
 </style>
 
