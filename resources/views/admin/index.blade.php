@@ -31,17 +31,26 @@
                     Admin Dashboard
                     <a href="{{ url('/logout') }}" class="pull-right">Logout</a>
                 </div>
-                <div class="panel-body">
-                    <a href="{{ url('/employees') }}">Employee Management</a>
-                </div>
-                <div class="panel-body">
-                    <a href="{{ url('/hours') }}">Business Hours</a>
-                </div>
-                <div class="panel-body">
-                    <a href="{{ url('/services') }}">Business Services</a>
-                </div>
-                <div class="panel-body">
-                    <a href="{{ url('/booking/') }}">Make booking for customer</a>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                            <td></td>
+                                <td>
+                                    <a href="{{ url('/employees') }}">Employee Management</a>
+                                </td>
+                                <td>                    
+                                    <a href="{{ url('/hours') }}">Business Hours</a>
+                                </td>
+                                <td>                    
+                                    <a href="{{ url('/services') }}">Business Services</a>
+                                </td>
+                                <td>
+                                    <a href="{{ url('/booking/') }}">Make booking for customer</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

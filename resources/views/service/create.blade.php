@@ -12,11 +12,6 @@
                     Service Creator
                     <a href="{{ url('/services') }}" class="pull-right">Back</a>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Service Creator
-                </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/services') }}">
                         {{ csrf_field() }}
@@ -37,7 +32,7 @@
                         <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                             <label for="description" class="col-md-4 control-label">Description</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control" placeholder="Description of service"
                                        name="description" value="{{ old('description') }}" required>
                                 @if ($errors->has('description'))
                                     <span class="help-block">
@@ -68,7 +63,7 @@
                         <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
                             <label for="price" class="col-md-4 control-label">Price</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control"
+                                <input type="text" class="form-control" placeholder="Price of service"
                                        name="price" value="{{ old('price') }}" required>
                                 @if ($errors->has('price'))
                                     <span class="help-block">
@@ -86,6 +81,7 @@
                     </form>
                 </div>
             </div>
+>>>>>>> development
         </div>
     </div>
 @stop
