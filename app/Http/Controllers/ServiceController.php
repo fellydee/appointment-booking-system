@@ -31,16 +31,6 @@ class ServiceController extends Controller
     }
 
     /**
-     * Returns a page showing info for the given service
-     * @param Service $service
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function show(Service $service)
-    {
-        return view('service.show', compact('service'));
-    }
-
-    /**
      * Returns the page to create a new service
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

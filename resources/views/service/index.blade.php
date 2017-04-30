@@ -38,7 +38,7 @@
                             <tbody>
                             @foreach($services as $service)
                                 <tr>
-                                    <td class="col-md-2"><a href="{{ url('/services/'.$service->id) }}">{{ $service->title }}</a></td>
+                                    <td class="col-md-2">{{$service->title}}</td>
                                     <td class="col-md-5">{{$service->description}}</td>
                                     <td class="col-md-2">{{$service->duration}}</td>
                                     <td class="col-md-1">{{$service->price}}</td>
