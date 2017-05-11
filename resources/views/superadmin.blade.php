@@ -22,7 +22,7 @@
                             <div class="col-md-6">
                                 <select name="owner" id="" class="form-control">
                                     @foreach($users as $user)
-                                        <option value="{{$user->id}}">{{$user->fullName()}}</option>
+                                        <option value="{{$user->id}}" @if(old('owner') == $user->id) selected @endif">{{$user->fullName()}}</option>
                                     @endforeach
                                 </select>
                             </div>
