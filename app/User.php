@@ -44,6 +44,15 @@ class User extends Authenticatable
     }
 
     /**
+     * Returns if the user is a super admin
+     * @return bool
+     */
+    public function isSuperAdmin()
+    {
+        return $this->role == 100;
+    }
+
+    /**
      * Defines the relationship between user and business
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

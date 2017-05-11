@@ -5,6 +5,8 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/admin', 'AdminController@index');
 
+Route::resource('/super', 'SuperAdminController');
+
 Route::resource('/employees', 'EmployeeController');
 
 Route::resource('/rosters', 'RosterController', ['only' => [
