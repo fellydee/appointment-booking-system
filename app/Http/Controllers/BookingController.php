@@ -14,7 +14,7 @@ class BookingController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth','role']);
+        $this->middleware(['auth']);
     }
 
     /**
@@ -66,13 +66,11 @@ class BookingController extends Controller
 
     public function index()
     {
-        if (isset(Auth::user()->business_id)) {
-            $business = Auth::user()->business;
-            $users = User::all(); // Not sure if should exclude business owners
-            return view('booking.forCustomer', compact('business', 'users'));
+        $business = Auth::user()->business;
+        if (Auth::user()->role == 0) {
+            return view('booking.forCustomer', compact('business'));
         }
-        $businesses = Business::all();
-        return view('booking.index', compact('businesses'));
+        return view('booking.index', compact('business'));
     }
 
     public function showService($id)
