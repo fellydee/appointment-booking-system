@@ -11,7 +11,16 @@
             <div class="panel-body">
                 <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
-
+                    <div class="form-group">
+                        <label for="business_id" class="col-md-4 control-label">Business</label>
+                        <div class="col-md-6">
+                            <select name="business_id" class="form-control" required autofocus>
+                                @foreach($businesses as $business)
+                                    <option value="{{$business->id}}" @if(old('business_id') == $business->id) selected @endif>{{$business->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                         <label for="first_name" class="col-md-4 control-label">First Name</label>
                         <div class="col-md-6">

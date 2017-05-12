@@ -54,6 +54,7 @@ class RegisterController extends Controller
             'phone' => 'required|digits:10',
             'address' => 'required',
             'password' => 'required|confirmed|regex:/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/',
+            'business_id' => 'required',
         ]);
     }
 
@@ -72,6 +73,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'address' => $data['address'],
             'password' => bcrypt($data['password']),
+            'business_id' => $data['business_id'],
             'role' => 1
         ]);
     }
