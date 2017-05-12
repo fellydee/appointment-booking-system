@@ -10,3 +10,4 @@ Homestead.yaml
 .env.dusk.local
 phpunit.dusk.xml
 debug.log
+/public/img/upload

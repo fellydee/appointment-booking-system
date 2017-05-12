@@ -27,7 +27,11 @@
 <style>
 
 body {
-    background-image: url("/img/background.jpg");
+    @if(empty(Auth::user()->business->bg_img))
+        background-image: url("/img/background.jpg");
+    @else
+        background-image: url({{Auth::user()->business->bg_img}});
+    @endif
     background-size: cover;
     background-attachment: fixed;
     background-position: center center;

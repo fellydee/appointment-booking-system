@@ -15,6 +15,9 @@
                         <label for="business_id" class="col-md-4 control-label">Business</label>
                         <div class="col-md-6">
                             <select name="business_id" class="form-control" required autofocus>
+                                @if(count($businesses)==0)
+                                    <option value="-1">No businesses</option>
+                                @endif
                                 @foreach($businesses as $business)
                                     <option value="{{$business->id}}" @if(old('business_id') == $business->id) selected @endif>{{$business->name}}</option>
                                 @endforeach

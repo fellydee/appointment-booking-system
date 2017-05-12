@@ -9,6 +9,8 @@ Route::resource('/super', 'SuperAdminController');
 
 Route::resource('/employees', 'EmployeeController');
 
+Route::resource('/business','BusinessController');
+
 Route::resource('/rosters', 'RosterController', ['only' => [
     'create', 'store', 'update', 'destroy', 'edit',
 ]]);

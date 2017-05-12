@@ -9,7 +9,11 @@
             </button>
 
             <a class="navbar-brand" href="{{ url('') }}">
-                {{ config('app.name', 'Laravel') }}
+                @if(empty(Auth::user()->business->logo_img))
+                    Appointment Booking System
+                @else
+                    <img src="{{Auth::user()->business->logo_img}}" class="img-responsive" style="max-height:100%">
+                @endif
             </a>
         </div>
 

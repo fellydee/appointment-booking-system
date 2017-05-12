@@ -19,6 +19,10 @@ class CreateBusinessesTable extends Migration
             $table->string('address');
             $table->string('phone');
             $table->string('email');
+            $table->string('bg_img')->nullable();
+            $table->string('logo_img')->nullable();
+            $table->string('main_title')->nullable();
+            $table->string('main_text')->nullable();
             $table->timestamps();
         });
     }
