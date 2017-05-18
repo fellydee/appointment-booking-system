@@ -53,3 +53,14 @@ $factory->define(App\Timeslot::class, function (Faker\Generator $faker) {
         'end_time' => $faker->time('H:i:s','now'),
     ];
 });
+
+$factory->define(App\Booking::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => 1,
+        'business_id' => 1,
+        'employee_id' => 1,
+        'service_id' => 1,
+        'date' => $faker->date(),
+        'time' => $faker->time()
+    ];
+});

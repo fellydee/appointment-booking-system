@@ -16,12 +16,13 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     {{ $employee->fullName() }}
-                    <a href="/employees/{{ $employee->id }}/edit" class="pull-right">Edit</a>
+                    <a href="/employees/" class="pull-right">Back</a>
                 </div>
                 <div class="panel-body">
                     <p>Email: {{ $employee->email }}</p>
                     <p>Phone: {{ $employee->phone }}</p>
                     <p>Address: {{ $employee->address }}</p>
+                    <a class="btn btn-primary pull-right" href="/employees/">Edit</a>
                 </div>
             </div>
                 <div class="panel panel-default">

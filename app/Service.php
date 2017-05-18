@@ -2,12 +2,18 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Service extends Model
+class Service extends EloquentModel
 {
-    protected $fillable = ['business_id','title','description','duration','price'];
+    protected $guarded = [];
+
     protected $hidden = ['business_id'];
+
+    protected $rules = [
+        'title' => 'required',
+        'description' => 'required',
+        'duration' => 'required|numeric',
+        'price' => 'required|numeric'
+    ];
 
     /**
      * Defines the relationship between service and the employees
@@ -30,7 +36,7 @@ class Service extends Model
      * Defines the relationship between service and booking
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function booking(){
+    public function bookings() {
         return $this->hasMany(Booking::class);
     }
 

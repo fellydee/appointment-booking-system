@@ -3,20 +3,13 @@
 namespace Tests\Feature;
 
 use App\User;
-use App\Booking;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ApiTest extends TestCase
 {
+    use DatabaseMigrations;
 
-    use DatabaseTransactions;
-
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function test_api_mybookings_avaliable_when_user_is_not_authenticated()
     {
         $user = factory(User::class)->create();

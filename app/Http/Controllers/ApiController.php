@@ -149,7 +149,6 @@ class ApiController extends Controller
 
         // Remove all slots that cannot support the service length
         $slotsRequired = $service->duration / 30;
-        if ($slotsRequired > 1) {
             // For each of the times the employee is available remove slots that cannot support the service
             foreach ($times as $time) {
                 $valid = true;
@@ -165,9 +164,6 @@ class ApiController extends Controller
                     array_push($serviceTimes, $time);
                 }
             }
-        } else {
-            $serviceTimes = $times;
-        }
 
         // Format the times
         $formattedTimes = array();

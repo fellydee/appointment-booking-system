@@ -2,11 +2,19 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 
-class Employee extends Model
+class Employee extends EloquentModel
 {
     protected $guarded = [];
+
+    protected $rules = [
+        'first_name' => 'required|alpha|min:1|max:60',
+        'last_name' => 'required|alpha|min:1|max:60',
+        'email' => 'required|email|unique:employees,email',
+        'phone' => 'required|digits:10',
+        'address' => 'required|max:80'
+    ];
 
     /**
      * Returns the full name of the customer
@@ -41,7 +49,7 @@ class Employee extends Model
      */
     public function services()
     {
-        return $this->belongsToMany(Service::class,'employee_services');
+        return $this->belongsToMany(Service::class, 'employee_services');
     }
 
     /**
@@ -98,9 +106,5 @@ class Employee extends Model
             }
         }
         return array_values($times);
-
-        // Return array of times
     }
-
-
 }
