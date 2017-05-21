@@ -70,6 +70,7 @@ class BookingController extends Controller
         if (Auth::user()->role == 0) {
             return view('booking.forCustomer', compact('business'));
         }
+
         return view('booking.index', compact('business'));
     }
 
@@ -79,7 +80,6 @@ class BookingController extends Controller
         $business = Business::where('id', $service->business_id)->first();
         return view('booking.selectEmployee', compact(['service', 'business']));
     }
-
 
     public function showEmployee($service_id, $employee_id)
     {

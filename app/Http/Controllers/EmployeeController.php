@@ -66,16 +66,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'first_name' => 'required|alpha|min:1|max:60',
-            'last_name' => 'required|alpha|min:1|max:60',
-            'email' => 'required|email|unique:employees,email',
-            'phone' => 'required|digits:10',
-            'address' => 'required|max:80'
-        ]);
-
         $employee = new Employee([
-            'business_id' => $request->user()->business_id,
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
@@ -83,7 +74,7 @@ class EmployeeController extends Controller
             'address' => $request->get('address')
         ]);
 
-        $employee->save();
+        Auth::user()->business()->save($employee);
 
         return redirect('/employees');
     }

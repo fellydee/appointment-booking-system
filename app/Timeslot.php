@@ -2,10 +2,7 @@
 
 namespace App;
 
-use Faker\Provider\DateTime;
-use Illuminate\Database\Eloquent\Model;
-
-class Timeslot extends Model
+class Timeslot extends EloquentModel
 {
     protected $guarded = [];
     protected $hidden = ['employee_id','id'];

@@ -2,11 +2,16 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Business extends Model
+class Business extends EloquentModel
 {
     protected $guarded = [];
+
+    protected $rules = [
+        'name' => 'required',
+        'address' => 'required',
+        'phone' => 'required|numeric',
+        'email' => 'required|email|unique:businesses,email',
+    ];
 
     /**
      * Defines the relationship between business and employee
@@ -29,7 +34,7 @@ class Business extends Model
      * Defines the relationship between business and service
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function service(){
+    public function services(){
         return $this->hasMany(Service::class);
     }
 

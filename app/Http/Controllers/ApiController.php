@@ -165,6 +165,7 @@ class ApiController extends Controller
             }
         }
 
+
         // Format the times
         $formattedTimes = array();
         foreach ($serviceTimes as $time) {

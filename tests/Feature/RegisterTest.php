@@ -4,14 +4,11 @@ namespace Tests\Feature;
 
 use App\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class RegisterTest extends TestCase
 {
-
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
     public function test_register_page_status_OK()
     {
@@ -29,21 +26,4 @@ class RegisterTest extends TestCase
 
         $response->assertStatus(302);
     }
-
-//    public function test_password_length_less_than_six_fails()
-//    {
-//        $user = factory(User::class)->make([
-//            'password' => bcrypt('four')
-//        ]);
-//
-//        $response = $this->call('POST', '/register', [
-//            'name' => $user->name,
-//            'email' => $user->email,
-//            'password' => $user->password,
-//            'password_confirmation' => $user->password,
-//            'role' => 1
-//        ]);
-//
-//        $response->assertRedirect('/register');
-//    }
 }
