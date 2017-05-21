@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Business;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -39,6 +40,12 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        $businesses = Business::all();
+        return view('auth.register',compact('businesses'));
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -54,6 +61,7 @@ class RegisterController extends Controller
             'phone' => 'required|digits:10',
             'address' => 'required',
             'password' => 'required|confirmed|regex:/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/',
+            'business_id' => 'required',
         ]);
     }
 
@@ -72,6 +80,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'address' => $data['address'],
             'password' => bcrypt($data['password']),
+            'business_id' => $data['business_id'],
             'role' => 1
         ]);
     }

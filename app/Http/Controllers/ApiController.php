@@ -71,8 +71,9 @@ class ApiController extends Controller
      * @param $business_id
      * @return array
      */
-    public function getAllBookings($business_id){
-        $bookings = Booking::where('business_id',$business_id)->get();
+    public function getAllBookings($business_id)
+    {
+        $bookings = Booking::where('business_id', $business_id)->get();
         $formatted = array();
         foreach ($bookings as $booking) {
             array_push($formatted, $booking->fullCalendarFormatOwner());
@@ -149,27 +150,28 @@ class ApiController extends Controller
 
         // Remove all slots that cannot support the service length
         $slotsRequired = $service->duration / 30;
-            // For each of the times the employee is available remove slots that cannot support the service
-            foreach ($times as $time) {
-                $valid = true;
-                for ($i = 0; $i < $slotsRequired; $i++) {
-                    $current = $current = date("H:i:s", strtotime("+30 minutes", strtotime($time)));
-                    $val = array_search($current, $times);
-                    if ($val == false) {
-                        $valid = false;
-                    }
-                }
-                // if the time is valid push it to the array
-                if ($valid == true) {
-                    array_push($serviceTimes, $time);
+
+        // For each of the times the employee is available remove slots that cannot support the service
+        foreach ($times as $time) {
+            $validTime = true;
+            for ($i = 0; $i < $slotsRequired-1; $i++) {
+                $current = date("H:i:s", strtotime("+" . ($i+1)*30 . " minutes", strtotime($time)));
+                if(array_search($current,$times) == false){
+                    $validTime = false;
                 }
             }
+            if($validTime){
+                array_push($serviceTimes,$time);
+            }
+        }
+
 
         // Format the times
         $formattedTimes = array();
         foreach ($serviceTimes as $time) {
             array_push($formattedTimes, date("g:i A", strtotime($time)));
         }
+
         return $formattedTimes;
     }
 

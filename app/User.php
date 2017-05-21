@@ -14,7 +14,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $guarded = ['business_id'];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -41,6 +41,15 @@ class User extends Authenticatable
     public function isBusinessOwner()
     {
         return $this->role == 0;
+    }
+
+    /**
+     * Returns if the user is a super admin
+     * @return bool
+     */
+    public function isSuperAdmin()
+    {
+        return $this->role == 100;
     }
 
     /**

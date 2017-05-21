@@ -66,13 +66,10 @@ class BookingController extends Controller
 
     public function index()
     {
-        if (Auth::user()->isBusinessOwner()) {
-            $business = Auth::user()->business;
-            $users = User::all(); // Not sure if should exclude business owners
-            return view('booking.forCustomer', compact('business', 'users'));
-        }
-//        $businesses = Business::all();
         $business = Auth::user()->business;
+        if (Auth::user()->role == 0) {
+            return view('booking.forCustomer', compact('business'));
+        }
 
         return view('booking.index', compact('business'));
     }

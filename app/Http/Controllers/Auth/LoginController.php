@@ -50,6 +50,11 @@ class LoginController extends Controller
         {
             return redirect()->intended('/admin');
         }
+
+        if($user->isSuperAdmin())
+        {
+            return redirect()->intended('/super');
+        }
         return redirect()->intended('/home');
     }
 }
