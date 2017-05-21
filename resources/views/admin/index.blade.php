@@ -20,7 +20,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             @if(request()->session()->has('status'))
                 <div class="alert alert-success" role="alert">
                     {{ request()->session()->get('status') }}
@@ -44,6 +44,9 @@
                                 </td>
                                 <td>                    
                                     <a href="{{ url('/services') }}">Business Services</a>
+                                </td>
+                                <td>
+                                    <a href="{{ url('/business') }}">Business Settings</a>
                                 </td>
                                 <td>
                                     <a href="{{ url('/booking/') }}">Make booking for customer</a>

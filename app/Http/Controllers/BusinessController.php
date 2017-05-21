@@ -25,24 +25,25 @@ class BusinessController extends Controller
         return view('business.index', compact('business'));
     }
 
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'main_title' => 'required|max:50',
-            'main_text' => 'required|max:200',
-        ]);
-    }
-
     function storeImage($file, $destination, $filename)
     {
         $ext = $file->extension();
         $fullpath = $destination . $filename . '.' . $ext;
-        $file->move( base_path() . '/public/' . $destination, $filename . '.' . $ext);
+        $file->move(base_path() . '/public/' . $destination, $filename . '.' . $ext);
         return $fullpath;
     }
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'main_title' => 'required|max:50',
+            'main_text' => 'required|max:200',
+            'name' => 'required',
+            'email' => 'required|email|unique:businesses',
+            'phone' => 'required',
+            'address' => 'required',
+        ]);
+
         $business = Auth::user()->business;
 
         $business->main_title = $request->get('main_title');
@@ -58,9 +59,15 @@ class BusinessController extends Controller
             $path = $this->storeImage($request->file('logo'), $destination, 'logo_img');
             $business->logo_img = $path;
         }
+
+        $business->name = $request->get('name');
+        $business->email = $request->get('email');
+        $business->phone = $request->get('phone');
+        $business->address = $request->get('address');
+
         $business->save();
         session()->flash('status', 'Business Settings Updated');
-        return redirect('/business');
+        return redirect('/admin');
     }
 
 
