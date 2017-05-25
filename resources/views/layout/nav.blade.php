@@ -1,3 +1,4 @@
+<script src="js/bootstrap.min.js"></script>
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
