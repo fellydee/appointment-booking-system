@@ -66,6 +66,13 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'first_name' => 'required|alpha|min:1|max:60',
+            'last_name' => 'required|alpha|min:1|max:60',
+            'email' => 'required|email|unique:employees',
+            'phone' => 'required|digits:10',
+            'address' => 'required|max:80'
+        ]);
         $employee = new Employee([
             'business_id' => $request->user()->business_id,
             'first_name' => $request->get('first_name'),
