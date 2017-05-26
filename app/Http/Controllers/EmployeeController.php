@@ -67,7 +67,7 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $employee = new Employee([
-            'business_id' => Auth::user()->id,
+            'business_id' => $request->user()->business_id,
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),

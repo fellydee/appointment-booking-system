@@ -55,7 +55,7 @@ class BusinessTest extends TestCase
     {
         $this->assertInstanceOf(
             'Illuminate\Database\Eloquent\Collection',
-            $this->business->services
+            $this->business->service
         );
     }
 

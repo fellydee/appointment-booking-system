@@ -60,7 +60,7 @@ class ServiceTest extends TestCase
     {
         $this->assertInstanceOf(
             'Illuminate\Database\Eloquent\Collection',
-            $this->service->bookings
+            $this->service->booking
         );
     }
 

@@ -42,7 +42,7 @@ class BookingTest extends TestCase
     public function test_it_has_a_service()
     {
         $service = factory('App\Service')->create();
-        $service->bookings()->save($this->booking);
+        $service->booking()->save($this->booking);
         $this->assertInstanceOf('App\Service', $this->booking->service);
     }
 
