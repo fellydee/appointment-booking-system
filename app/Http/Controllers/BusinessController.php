@@ -35,15 +35,6 @@ class BusinessController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'main_title' => 'required|max:50',
-            'main_text' => 'required|max:200',
-            'name' => 'required',
-            'email' => 'required|email|unique:businesses',
-            'phone' => 'required',
-            'address' => 'required',
-        ]);
-
         $business = Auth::user()->business;
 
         $business->main_title = $request->get('main_title');
