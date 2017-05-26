@@ -22,7 +22,7 @@
                     <p>Email: {{ $employee->email }}</p>
                     <p>Phone: {{ $employee->phone }}</p>
                     <p>Address: {{ $employee->address }}</p>
-                    <a class="btn btn-primary pull-right" href="/employees/">Edit</a>
+                    <a class="btn btn-primary pull-right" href="/employees/{{$employee->id}}/edit">Edit</a>
                 </div>
             </div>
                 <div class="panel panel-default">
