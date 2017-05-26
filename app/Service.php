@@ -36,7 +36,7 @@ class Service extends EloquentModel
      * Defines the relationship between service and booking
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function bookings() {
+    public function booking() {
         return $this->hasMany(Booking::class);
     }
 

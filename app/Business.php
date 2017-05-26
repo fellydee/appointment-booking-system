@@ -34,7 +34,7 @@ class Business extends EloquentModel
      * Defines the relationship between business and service
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function services(){
+    public function service(){
         return $this->hasMany(Service::class);
     }
 
