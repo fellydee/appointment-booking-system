@@ -38,4 +38,9 @@ class Business extends EloquentModel
         return $this->hasMany(Service::class);
     }
 
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
 }

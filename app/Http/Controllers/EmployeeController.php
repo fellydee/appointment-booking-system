@@ -67,6 +67,7 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $employee = new Employee([
+            'business_id' => Auth::user()->id,
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'email' => $request->get('email'),
@@ -74,7 +75,7 @@ class EmployeeController extends Controller
             'address' => $request->get('address')
         ]);
 
-        Auth::user()->business()->save($employee);
+        $employee->save();
 
         return redirect('/employees');
     }
