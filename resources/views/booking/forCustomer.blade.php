@@ -11,6 +11,8 @@
                     <h3 class="panel-title">Booking for new customer</h3>
                 </div>
                 <div class="panel-body">
+                    <p>The customer will be emailed a link to set their password. (Not implmented)</p>
+                    <p>Currently the password is just the email</p>
                     <form class="form-horizontal" role="form" method="POST" action="/booking/customer/">
                         {{ csrf_field() }}
 

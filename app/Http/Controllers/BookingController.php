@@ -53,6 +53,7 @@ class BookingController extends Controller
         $user = User::create([
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
+            'business_id'=> Auth::user()->business_id,
             'email' => $request['email'],
             'phone' => $request['phone'],
             'address' => $request['address'],
