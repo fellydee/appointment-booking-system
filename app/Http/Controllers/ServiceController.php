@@ -86,7 +86,7 @@ class ServiceController extends Controller
             'title' => 'required',
             'description' => 'required',
             'duration' => 'required',
-            'price' => 'required'
+            'price' => 'required|numeric'
         ]);
 
         $service->title = $request->get('title');

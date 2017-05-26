@@ -81,7 +81,6 @@
                     </form>
                 </div>
             </div>
->>>>>>> development
         </div>
     </div>
 @stop
