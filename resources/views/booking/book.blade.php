@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <button type="submit" class="btn btn-primary pull-right">Make Booking</button>
+                        <button type="submit" id="bookbtn" class="btn btn-primary pull-right" disabled>Make Booking</button>
                     </div>
                 </form>
             </div>
@@ -96,7 +96,7 @@
             }).done(function (data) {
                 if (data.error) {
                     alert(data.error)
-
+                    document.getElementById("bookbtn").disabled = true;
                     return;
                 }
                 data.forEach(function (item) {
@@ -104,6 +104,7 @@
                 })
                 if(document.querySelector("#timeSelect").options.length > 0){
                     document.querySelector("#timeSelect").disabled = false;
+                    document.getElementById("bookbtn").disabled = false;
                 }
             })
 
